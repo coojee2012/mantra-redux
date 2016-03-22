@@ -10,11 +10,12 @@ import {routerReducer} from 'react-router-redux';
 import coreModule from './modules/core';
 import commentsModule from './modules/comments';
 import todoModule from './modules/todos';
-
+import customerModule from './modules/customer';
 // Combine Reducers
 const reducer = combineReducers({
   ...coreModule.reducers,
   ...todoModule.reducers,
+  ...customerModule.reducers,
   routing: routerReducer
 });
 
@@ -26,5 +27,7 @@ const app = createApp(context);
 app.loadModule(coreModule);
 app.loadModule(commentsModule);
 app.loadModule(todoModule);
+app.loadModule(customerModule);
+
 
 app.init();

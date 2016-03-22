@@ -5,16 +5,16 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 import {Tracker} from 'meteor/tracker';
 // Redux
 //import ReduxState from './ReduxState';
-import {createStore} from 'redux';
-
+import {createStore,applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 export default function ({reducer}) {
   return {
     Meteor,
-   // FlowRouter,
+    // FlowRouter,
     Collections,
     LocalState: new ReactiveDict(),
-    Store: createStore(reducer),
-   //ReduxState: new ReduxState(),
+    Store: createStore(reducer, applyMiddleware(thunk)),
+    //ReduxState: new ReduxState(),
     Tracker
   };
 }

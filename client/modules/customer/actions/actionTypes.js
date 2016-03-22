@@ -4,17 +4,10 @@
 /*
  * action 类型
  */
+export const CUSTOMER_SEARCH = 'CUSTOMER_SEARCH';
+export const CUSTOMER_SEARCH_CREATE = 'CUSTOMER_SEARCH_CREATE';
+export const CUSTOMER_SEARCH_SELECTED = 'CUSTOMER_SEARCH_SELECTED';
+export const CUSTOMER_SEARCH_KEY = 'CUSTOMER_SEARCH_KEY';
+export const CUSTOMER_CREATE = 'CUSTOMER_CREATE';
+export const CUSTOMER_EDIT = 'CUSTOMER_EDIT';
 
-export const ADD_TODO = 'ADD_TODO';
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
-
-/*
- * 其它的常量
- */
-
-export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_ACTIVE: 'SHOW_ACTIVE'
-};

@@ -1,5 +1,7 @@
-import todosActions from './actionFns';
+import customerReduxActions from './reduxActions';
+import customerLogicActions from './logicActions';
 
 export default {
-  todosActions
+  customerReduxActions,
+  customerLogicActions
 };

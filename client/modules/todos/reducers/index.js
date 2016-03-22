@@ -4,4 +4,4 @@
 import reducers from './reducers';
 export default {
   todos: reducers
-}
+};

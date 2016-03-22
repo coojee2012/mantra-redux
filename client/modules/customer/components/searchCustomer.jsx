@@ -2,6 +2,7 @@ import React from 'react';
 let cacheSearchInputWord = null;
 class SearchCustomer extends React.Component {
   render() {
+    console.log('customer UI :',this.props);
     return (
       <div className ='component'>
         {this.props.customerKey === null ? (<div></div>) : (
@@ -27,7 +28,7 @@ class SearchCustomer extends React.Component {
             <div className='payload'>
               <div className='resultTool'>
                 <div className='plzSelect'>请选择联系人</div>
-                <div className='createNew' onClick={this.openCreateCustomer.bind(this)}>+新建联系人</div>
+                <div className='createNew' onClick={this.searchCustomerTest.bind(this)}>+新建联系人</div>
               </div>
               <table className="table table-hover" style={{width:"80%",margin: "0 auto"}}>
                 <thead>
@@ -58,6 +59,10 @@ class SearchCustomer extends React.Component {
     this.props.gotoBackCustomer(this.props.customerKey)
   }
 
+  searchCustomerTest(){
+    let {logicActions} = this.props;
+    logicActions.search('15308098290');
+  }
   searchCustomer() {
     const {searchCustomers} = this.props;
     const {searchKeyRef} = this.refs;

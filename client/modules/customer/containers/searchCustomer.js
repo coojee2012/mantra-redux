@@ -1,51 +1,36 @@
 /**
  * Created by LinYong on 2016/3/22.
  */
-
 import { useDeps, compose, composeAll } from 'mantra-core';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { VisibilityFilters } from '../configs/const';
-import actionCreators from '../actions/actionFns';
+import reduxActionCreators from '../actions/reduxActions';
+import logicActionCreators from '../actions/logicActions';
 import searchCustomerApp from '../components/searchCustomer.jsx';
 
-
-function selectTodos(todos, filter) {
-  switch (filter) {
-    case VisibilityFilters.SHOW_ALL:
-      return todos;
-    case VisibilityFilters.SHOW_COMPLETED:
-      return todos.filter(todo => todo.completed);
-    case VisibilityFilters.SHOW_ACTIVE:
-      return todos.filter(todo => !todo.completed);
-  }
-}
-
-// Which props do we want to inject, given the global state?
-// Note: use https://github.com/faassen/reselect for better performance.
 function select(state) {
   console.log('state:', state);
   return {
-    visibleTodos: selectTodos(state.aa.todos, state.aa.visibilityFilter),
-    visibilityFilter: state.aa.visibilityFilter
+    visibleLists: state['customer'].lists,
+    searchKey: state['customer'].searchKey
   };
 }
 function mapDispatchToProps(dispatch) {
-  return {actions: bindActionCreators(actionCreators, dispatch)};
+  return {
+    reduxActions: bindActionCreators(reduxActionCreators, dispatch),
+    logicActions: bindActionCreators(logicActionCreators, dispatch)
+  };
 }
 
-
 export const composer = ({context}, onData) => {
-  const {Meteor, Collections,ReduxState} = context();
-  const store = ReduxState.Store();
-  console.log('todo container store:', store);
+  const {Store} = context();
+  console.log('todo container store:', Store);
   onData(null, {
-    visibilityFilter: 'SHOW_ALL',
-    todos: []
+    searchKey: '',
+    lists: []
   });
-  return store.subscribe(() => {
-
-    const allState = store.getState();
+  return Store.subscribe(() => {
+    const allState = Store.getState();
     console.log('sub todos container :', allState);
     onData(null, allState);
   });
@@ -54,7 +39,6 @@ export const composer = ({context}, onData) => {
 export const depsMapper = (context, actions) => {
   console.log('注入action函数:', actions);
   return {
-    //...actions.todosActions,
     context: () => context
   };
 }

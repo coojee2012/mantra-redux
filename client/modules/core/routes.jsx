@@ -11,7 +11,7 @@ import Post from './containers/post';
 import NewPost from './containers/newpost';
 import Welcome from './containers/welcome';
 import Todo from '../todos/containers/App';
-
+import SearchCustomer from '../customer/containers/searchCustomer';
 export default function (injectDeps, {Meteor,Store}) {
   //const store = ReduxState.Store();
   const history = syncHistoryWithStore(browserHistory, Store);
@@ -24,6 +24,7 @@ export default function (injectDeps, {Meteor,Store}) {
             <IndexRoute component={PostList}/>
             <Route path="post/:postId" component={Post}/>
             <Route path="todo" component={Todo}/>
+            <Route path="search/:key" component={SearchCustomer}/>
           </Route>
         </Router>
       </Provider>, document.body
