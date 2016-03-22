@@ -11,7 +11,7 @@ class SearchCustomer extends React.Component {
           </span>返回</div>)}
         <div className='toolBar'>
           <div>
-            <input ref="searchKeyRef" className='searchInput' type="text" defaultValue={this.props.searchKey}
+            <input ref="searchKeyRef" className='searchInput' type="text" defaultValue={this.props.searchKey} value={this.props.searchKey}
                    placeholder={this.props.placeHolder}
                    onKeyUp={this.onKeyUp.bind(this)}/>
           </div>
@@ -28,7 +28,7 @@ class SearchCustomer extends React.Component {
             <div className='payload'>
               <div className='resultTool'>
                 <div className='plzSelect'>请选择联系人</div>
-                <div className='createNew' onClick={this.searchCustomerTest.bind(this)}>+新建联系人</div>
+                <div className='createNew' onClick={this.setSearchKeyTest.bind(this)}>+新建联系人</div>
               </div>
               <table className="table table-hover" style={{width:"80%",margin: "0 auto"}}>
                 <thead>
@@ -63,6 +63,11 @@ class SearchCustomer extends React.Component {
     let {logicActions} = this.props;
     logicActions.search('15308098290');
   }
+  setSearchKeyTest(){
+    const {logicActions} = this.props;
+    const searchKey = new Date().getTime()+' ms';
+    logicActions.setSearchKey(searchKey);
+  }
   searchCustomer() {
     const {searchCustomers} = this.props;
     const {searchKeyRef} = this.refs;
@@ -75,6 +80,10 @@ class SearchCustomer extends React.Component {
 
   onKeyUp(e) {
     if (e.keyCode === 13) {
+
+      let {logicActions} = this.props;
+      let searchKey = new Date().getTime()+' ms';
+      logicActions.setSearchKey(searchKey);
       const {searchCustomers} = this.props;
       const {searchKeyRef} = this.refs;
       if (searchKeyRef.value && searchKeyRef.value.length > 0) {
@@ -130,6 +139,9 @@ class SearchCustomer extends React.Component {
        </div>
        </div>*/);
   }
+
+}
+SearchCustomer.propTypes = {
 
 }
 export default SearchCustomer;

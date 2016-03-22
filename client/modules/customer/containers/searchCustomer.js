@@ -11,8 +11,8 @@ import searchCustomerApp from '../components/searchCustomer.jsx';
 function select(state) {
   console.log('state:', state);
   return {
-    visibleLists: state['customer'].lists,
-    searchKey: state['customer'].searchKey
+    visibleLists: state['customer']['searchReducer'].customerLists,
+    searchKey: state['customer']['searchReducer'].setSearchKey
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -26,8 +26,8 @@ export const composer = ({context}, onData) => {
   const {Store} = context();
   console.log('todo container store:', Store);
   onData(null, {
-    searchKey: '',
-    lists: []
+    searchKey: 'a',
+    lists: ['d']
   });
   return Store.subscribe(() => {
     const allState = Store.getState();
