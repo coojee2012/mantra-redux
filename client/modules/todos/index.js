@@ -4,10 +4,8 @@
 import actions from './actions';
 import todoApp from './reducers/reducers';
 import loadReducer from '../../configs/ReduxState';
-
+import reducers from './reducers';
 export default {
   actions,
-  load(context) {
-    context.ReduxState.setReducer('aa',todoApp);
-  }
+  reducers
 };

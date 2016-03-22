@@ -1,12 +1,13 @@
 /**
- * Created by LinYong on 2016/3/17.
+ * Created by LinYong on 2016/3/22.
  */
+
 import { useDeps, compose, composeAll } from 'mantra-core';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { VisibilityFilters } from '../configs/const';
 import actionCreators from '../actions/actionFns';
-import App from '../components/App.jsx';
+import searchCustomerApp from '../components/searchCustomer.jsx';
 
 
 function selectTodos(todos, filter) {
@@ -25,9 +26,9 @@ function selectTodos(todos, filter) {
 function select(state) {
   console.log('state:', state);
   return {
-    visibleTodos: selectTodos(state.todos.todos, state.todos.visibilityFilter),
-    visibilityFilter: state.todos.visibilityFilter
-  }
+    visibleTodos: selectTodos(state.aa.todos, state.aa.visibilityFilter),
+    visibilityFilter: state.aa.visibilityFilter
+  };
 }
 function mapDispatchToProps(dispatch) {
   return {actions: bindActionCreators(actionCreators, dispatch)};
@@ -35,16 +36,16 @@ function mapDispatchToProps(dispatch) {
 
 
 export const composer = ({context}, onData) => {
-  const {Meteor, Collections,Store} = context();
-  //const store = ReduxState.Store();
-  console.log('todo container store:', Store);
+  const {Meteor, Collections,ReduxState} = context();
+  const store = ReduxState.Store();
+  console.log('todo container store:', store);
   onData(null, {
     visibilityFilter: 'SHOW_ALL',
     todos: []
   });
-  return Store.subscribe(() => {
+  return store.subscribe(() => {
 
-    const allState = Store.getState();
+    const allState = store.getState();
     console.log('sub todos container :', allState);
     onData(null, allState);
   });
@@ -64,4 +65,4 @@ export const depsMapper = (context, actions) => {
 export default composeAll(
   compose(composer),
   useDeps(depsMapper)
-)(connect(select, mapDispatchToProps)(App));
+)(connect(select, mapDispatchToProps)(searchCustomerApp));

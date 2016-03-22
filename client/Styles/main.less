@@ -1,0 +1,48 @@
+/**
+ * Created by alexchen on 2016-2-29
+ * unicall-messages styles
+ */
+@msg-error: #f69494;
+@msg-success: #50b595;
+.unicall-msg {
+  display: none;
+}
+
+.unicall-messages-base(@color) {
+  width: 330px;
+  height: 80px;
+  border: 1px @color solid;
+  position: fixed;
+  right: 40px;
+  bottom: 30px;
+  z-index: 999 !important;
+  background-color: white;
+  > .msg-left {
+    background-color: @color;
+    height: 79px;
+    width: 15px;
+    display: block;
+  }
+  > img {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 7px;
+  }
+  > .msg-content {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: 290px;
+    height: 60px;
+    overflow: hidden;
+  }
+}
+
+.unicall-msg-success {
+  .unicall-messages-base(@msg-success);
+}
+
+.unicall-msg-error {
+  .unicall-messages-base(@msg-error);
+}

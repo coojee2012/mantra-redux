@@ -1,0 +1,16 @@
+.btn-primary {
+  color: #fff;
+  background-color: #09B193;
+  border-color: #09B193;
+}
+.btn-primary:active:focus,
+.btn-primary:focus,
+.btn-primary:hover,
+.btn-primary:visited {
+  color: #fff;
+  background-color: #09B193;
+  border-color: #09B193;
+}
+html body {
+  overflow-x: hidden;
+}
