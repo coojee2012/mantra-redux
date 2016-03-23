@@ -6,7 +6,7 @@ const App = React.createClass({
     return (
       <div>
         <header>
-          <div className='tabContainerStyle'>
+          <div className='tabContainer'>
             <div className='tabUnselected'></div>
             <div className='tabSelected'>联系人</div>
             <div className='tabUnselected'></div>

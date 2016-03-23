@@ -3,7 +3,11 @@
  */
 import actions from './actions';
 import reducers from './reducers';
+import methodStubs from './configs/method_stubs';
 export default {
   actions,
-  reducers
+  reducers,
+  load(context) {
+    methodStubs(context);
+  }
 };

@@ -21,100 +21,100 @@
 .component {
   width: 100%;
   color: #777777;
-  fontWeight: 700
+  font-weight: 700
 }
 .toolBar{
   width: 60%;
-  marginTop: 60px;
-  marginLeft: 20%
+  margin-top: 60px;
+  margin-left: 20%
 }
 .searchInput{
   width: 100%;
   height: 27px;
   border: 2px solid #dddddd;
-  textAlign: center;
-  backgroundImage: url(images/search.png);
-  backgroundPosition: right;
-  backgroundRepeat: no-repeat
+  text-align: center;
+  background-image: url(/images/search.png);
+  background-position: right;
+  background-repeat: no-repeat;
 }
 .searchClick{
   width: 24px;
   height: 24px;
   right: 0px;
   position: absolute;
-  marginTop: -24px;
-  marginRight: 20%;
+  margin-top: -24px;
+  margin-right: 20%;
   cursor: pointer
 }
 .payload{
-  marginTop: 60px
+  margin-top: 60px
 }
 .resultTool{
   width: 80%;
-  marginLeft: 10%;
+  margin-left: 10%;
   height: 24px;
-  lineHeight: 24px
+  line-height: 24px
 }
 .plzSelect{
   width: 30%;
   display: inline;
   float: left;
-  fontWeight: 700;
-  fontSize: 12px;
-  textAlign: left
+  font-weight: 700;
+  font-size: 12px;
+  text-align: left
 }
 .createNew{
   width: 30%;
   display: inline;
   float: right;
-  fontWeight: 700;
-  fontSize: 12px;
-  textAlign: right;
+  font-weight: 700;
+  font-size: 12px;
+  text-align: right;
   cursor: pointer
 }
 .resultTitle{
   width: 80%;
-  backgroundColor: #eeeeee;
-  marginLeft: 10%;
+  background-color: #eeeeee;
+  margin-left: 10%;
   height: 24px;
-  lineHeight: 24px
+  line-height: 24px
 }
 .resultTitleCell{
   width: 30%;
   display: inline;
   float: left;
-  fontWeight: 700;
-  fontSize: 12px
+  font-weight: 700;
+  font-size: 12px
 }
 
 .result{
   width: 80%;
-  marginLeft: 10%;
+  margin-left: 10%;
   height: 36px;
-  lineHeight: 36px;
+  line-height: 36px;
   cursor: pointer
 }
 .resultCell{
   width: 30%;
   display: inline;
   float: left;
-  fontSize: 12px
+  font-size: 12px
 }
 .createSave{
   width: 30%;
-  marginTop: 100px;
+  margin-top: 100px;
   display: inline;
   float: right;
-  fontWeight: 700;
-  fontSize: 12px
+  font-weight: 700;
+  font-size: 12px
 }
 .createCancle{
   width: 30%;
-  marginTop: 100px;
+  margin-top: 100px;
   display: inline;
   float: right;
-  fontWeight: 700;
-  fontSize: 12px;
+  font-weight: 700;
+  font-size: 12px;
   cursor: pointer
 }
 .clickSpan{
