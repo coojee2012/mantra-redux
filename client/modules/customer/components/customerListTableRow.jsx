@@ -3,10 +3,9 @@ class CustomerListTableRow extends React.Component {
   render() {
     const {name,contact} = this.props.customer;
     return (
-      <tr style={{width: '40px'}}
-          onClick={this.action()}
-          onMouseOver={this.mouseOver()}
-          onMouseOut={this.mouseOut()}>
+      <tr onClick={this.action.bind(this)}
+          onMouseOver={this.mouseOver.bind(this)}
+          onMouseOut={this.mouseOut.bind(this)}>
         <td>{name}</td>
         <td>{contact}</td>
       </tr>
@@ -16,14 +15,19 @@ class CustomerListTableRow extends React.Component {
   selectRecord(id) {
     //return this.props.goCustomerDetail(id);
   }
-  action(record) {
+
+  action(e) {
     //this.selectRecord(record.id);
   }
-  mouseOver() {
-    //this.refs['record' + record.id].style.backgroundColor = '#eeffff'
+
+  mouseOver(e) {
+    const dom = e.target.parentElement;
+    dom.style.backgroundColor = '#000fff';
   }
-  mouseOut() {
-    //this.refs['record' + record.id].style.backgroundColor = ''
+
+  mouseOut(e) {
+    const dom = e.target.parentElement;
+    dom.style.backgroundColor = '';
   }
 }
 

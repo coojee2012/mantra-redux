@@ -19,7 +19,6 @@ function customerLists(state = [], action) {
   switch (action.type) {
     case CUSTOMER_SEARCH:
       return [
-        ...state,
         ...action.key
       ]
     default:
