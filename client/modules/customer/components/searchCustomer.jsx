@@ -14,9 +14,9 @@ class SearchCustomer extends React.Component {
              onClick={this.goBackToSelectedCustomerDetail.bind(this)}>
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true">
           </span>返回</div>)}
-        <SearchBar searchKey={searchKey} placeHolder='手机/电子邮件/姓名' logicActions={logicActions}/>
+        <SearchBar searchKey={searchKey} placeHolder='手机/电子邮件/姓名' logicActions={logicActions} context={context}/>
         <div className='payload'>
-          <CreatePanel />
+          <CreatePanel logicActions={logicActions} context={context} />
           <ListTable customers={visibleLists}/>
         </div>
 

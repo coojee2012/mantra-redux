@@ -2,7 +2,7 @@ import React from 'react';
 import Row from './customerListTableRow.jsx';
 class CustomerListTable extends React.Component {
   render() {
-    const { customers = [] } = this.props.customers;
+    const { customers = [] } = this.props;
     const rows = [];
     for (let customer of customers) {
       rows.push(<Row customer={customer}/>);

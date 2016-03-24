@@ -1,6 +1,7 @@
 import React from 'react';
 class SearchBar extends React.Component {
   render() {
+
     return (
       <div className='toolBar'>
         <div>
@@ -16,17 +17,9 @@ class SearchBar extends React.Component {
 
   onKeyUp(e) {
     console.log(e.keyCode);
+
     if (e.keyCode === 13) {
-      let {logicActions} = this.props;
-      let searchKey = new Date().getTime() + ' ms';
-      logicActions.setSearchKey(searchKey);
-      const {searchCustomers} = this.props;
-      const {searchKeyRef} = this.refs;
-      if (searchKeyRef.value && searchKeyRef.value.length > 0) {
-        searchCustomers(searchKeyRef.value, searchKeyRef);
-      } else {
-        searchCustomers(null, searchKeyRef);
-      }
+      this.searchCustomer();
     }
   }
 
@@ -37,12 +30,14 @@ class SearchBar extends React.Component {
   }
 
   searchCustomer() {
-    const {searchCustomers} = this.props;
+    const {context,logicActions} = this.props;
+    let searchKey = new Date().getTime() + ' ms';
+    logicActions.setSearchKey(context, searchKey);
     const {searchKeyRef} = this.refs;
     if (searchKeyRef.value && searchKeyRef.value.length > 0) {
-      searchCustomers(searchKeyRef.value, searchKeyRef);
+      logicActions.searchCustomers(context, searchKeyRef.value);
     } else {
-      searchCustomers(null, searchKeyRef);
+      logicActions.searchCustomers(null, searchKeyRef);
     }
   }
 }

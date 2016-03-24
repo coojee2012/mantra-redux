@@ -10,9 +10,9 @@ class CreateBtnPanle extends React.Component {
   }
 
   setSearchKeyTest() {
-    const {logicActions} = this.props;
+    const {context,logicActions} = this.props;
     const searchKey = new Date().getTime() + ' ms';
-    logicActions.setSearchKey(searchKey);
+    logicActions.setSearchKey(context,searchKey);
   }
 }
 export default CreateBtnPanle;

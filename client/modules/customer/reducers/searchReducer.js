@@ -20,10 +20,7 @@ function customerLists(state = [], action) {
     case CUSTOMER_SEARCH:
       return [
         ...state,
-        {
-          text: action.text,
-          completed: false
-        }
+        ...action.key
       ]
     default:
       return state;
