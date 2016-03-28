@@ -28,5 +28,14 @@ export default {
         dispatch(customerReduxActions.search(result));
       });
     };
+  },
+  addCustomer(context, key) {
+    return (dispatch) => {
+      const {Meteor} = context();
+      Meteor.call('customer.search',key, (err, result) => {
+        console.log('customer.search:',err,result);
+        dispatch(customerReduxActions.createCustomerNew(result));
+      });
+    };
   }
 };

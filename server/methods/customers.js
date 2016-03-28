@@ -23,7 +23,7 @@ export default function () {
           }
           ];
           resolve(data);
-        }, 1000);
+        }, 3000);
       });
     }
   });

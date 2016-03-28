@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 // Redux
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
-
+import {reducer as formReducer} from 'redux-form';
 // modules
 import coreModule from './modules/core';
 import commentsModule from './modules/comments';
@@ -16,8 +16,11 @@ const reducer = combineReducers({
   ...coreModule.reducers,
   ...todoModule.reducers,
   ...customerModule.reducers,
+  form: formReducer,
   routing: routerReducer
 });
+
+
 
 // Init Context
 const context = initContext({reducer});

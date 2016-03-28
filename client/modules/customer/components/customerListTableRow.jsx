@@ -22,7 +22,7 @@ class CustomerListTableRow extends React.Component {
 
   mouseOver(e) {
     const dom = e.target.parentElement;
-    dom.style.backgroundColor = '#000fff';
+    dom.style.backgroundColor = '#f7f7f7';
   }
 
   mouseOut(e) {

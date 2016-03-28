@@ -1,32 +1,34 @@
 /**
- * Created by LinYong on 2016/3/22.
+ * Created by LinYong on 2016/3/28.
  */
 import { useDeps, compose, composeAll } from 'mantra-core';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import reduxActionCreators from '../actions/reduxActions';
 import logicActionCreators from '../actions/logicActions';
-import searchCustomerApp from '../components/searchCustomer.jsx';
+import createCustomerApp from '../components/createCustomer.jsx';
 import Loading from '../components/loading.jsx';
 import ErrorUI from '../components/error.jsx';
 
-function select(state) {
-  console.log('state:', state);
+const mapStateToProps = (state) => {
+  console.log('create customer container state:', state);
   return {
-    visibleLists: state['customer']['searchReducer'].customerLists,
-    searchKey: state['customer']['searchReducer'].setSearchKey
+    customerInfo: state.customer.createReducer.customerInfo,
+    saveStatus: state.customer.createReducer.saveStatus,
+    createOrEdit:state.customer.createReducer.createOrEdit
   };
 }
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     reduxActions: bindActionCreators(reduxActionCreators, dispatch),
     logicActions: bindActionCreators(logicActionCreators, dispatch)
   };
 }
+const onPropsChange = (props, onData) => {
 
-export const composer = ({context}, onData) => {
+  const {context} = props;
   const {Store} = context();
-  console.log('todo container store:', Store);
+  console.log('create customer container store:', props,Store);
   onData(null, {
     searchKey: '',
     lists: []
@@ -36,19 +38,13 @@ export const composer = ({context}, onData) => {
     console.log('sub todos container :', allState);
     onData(null, allState);
   });
-};
-
+}
 export const depsMapper = (context, actions) => {
-  //console.log('注入action函数:', actions);
   return {
     context: () => context
   };
 }
-
-
-// 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
-//export const App connect(select,mapDispatchToProps)(App);
 export default composeAll(
-  compose(composer,Loading,ErrorUI),
+  compose(onPropsChange, Loading, ErrorUI),
   useDeps(depsMapper)
-)(connect(select, mapDispatchToProps)(searchCustomerApp));
+)(connect(mapStateToProps, mapDispatchToProps)(createCustomerApp));
