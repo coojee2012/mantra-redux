@@ -1,0 +1,8 @@
+/**
+ * Created by LinYong on 2016/3/29.
+ */
+export const TICKET_SAVING='TICKET_SAVING';
+export const TICKET_SAVE_DONE='TICKET_SAVE_DONE';
+export const TICKET_INFO='TICKET_INFO';
+export const TICKET_CREATE='TICKET_CREATE';
+export const TICKET_CREATE_ERROR='TICKET_CREATE_ERROR';

@@ -29,14 +29,11 @@ const onPropsChange = (props, onData) => {
   const {context} = props;
   const {Store} = context();
   console.log('create customer container store:', props,Store);
-  onData(null, {
-    searchKey: '',
-    lists: []
-  });
+  onData(null, Store.getState().customer);
   return Store.subscribe(() => {
     const allState = Store.getState();
-    console.log('sub todos container :', allState);
-    onData(null, allState);
+    console.log('onPropsChange sub customer container :', allState);
+    onData(null, Store.getState().customer);
   });
 }
 export const depsMapper = (context, actions) => {
@@ -47,4 +44,4 @@ export const depsMapper = (context, actions) => {
 export default composeAll(
   compose(onPropsChange, Loading, ErrorUI),
   useDeps(depsMapper)
-)(connect(mapStateToProps, mapDispatchToProps)(createCustomerApp));
+)(connect(null,mapDispatchToProps)(createCustomerApp));

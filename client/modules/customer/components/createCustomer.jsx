@@ -15,7 +15,7 @@ class CreateCustomer extends React.Component{
     return (
       <Row>
         <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group">
-          <form onSubmit={handleSubmit}>
+          <Col componentClass="form" onSubmit={handleSubmit}>
             <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group" style={h3Style}>
               <span style={{right: "15px"}}>{this.props.CreateCusotmerTitle}</span>
               {this.props.CreateCusotmerTitle == "快速新建联系人" ? "" : <span>
@@ -26,7 +26,7 @@ class CreateCustomer extends React.Component{
             </div>
             <div className="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
               <label htmlFor="exampleInputEmail1">姓名</label>
-              <input type="text" className="form-control"  placeholder="姓名" {...name}   maxLength="16"/>
+              <input type="text" {...name}  className="form-control"  placeholder="姓名"   maxLength="16"/>
             </div>
             <div className="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
               <label htmlFor="email">邮件</label>
@@ -70,7 +70,10 @@ class CreateCustomer extends React.Component{
                 </div>
                 }
               })()}
-          </form>
+          </Col>
+        </div>
+        <div>
+          {this.props.children}
         </div>
       </Row>
 

@@ -1,6 +1,8 @@
 import React from 'react';
 const App = React.createClass({
   render() {
+    console.log('Main_Layout UI:', this.props);
+    const {location} = this.props;
     return (
       <div>
         <header>
@@ -11,7 +13,14 @@ const App = React.createClass({
           </div>
         </header>
         <div className="container-fluid">
-          {this.props.children}
+          {
+            /^\/ticket/.test(location.pathname)?
+              (<div className="row">
+                {this.props.customer}
+                {this.props.ticket}
+              </div>):
+              this.props.children
+            }
         </div>
       </div>
     );

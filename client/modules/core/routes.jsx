@@ -13,6 +13,7 @@ import Welcome from './containers/welcome';
 import Todo from '../todos/containers/App';
 import SearchCustomer from '../customer/containers/searchCustomer';
 import CreateCustomer from '../customer/containers/createCustomer';
+import CreateTicket from '../tickets/containers/createTicket';
 
 export default function (injectDeps, {Meteor,Store}) {
   //const store = ReduxState.Store();
@@ -27,7 +28,9 @@ export default function (injectDeps, {Meteor,Store}) {
             <Route path="post/:postId" component={Post}/>
             <Route path="todo" component={Todo}/>
             <Route path="search(/:key)" component={SearchCustomer}/>
-            <Route path="customer/create" component={CreateCustomer}/>
+            <Route path="customer/create" component={CreateCustomer}>
+            </Route>
+            <Route path="ticket(/:cid)" components={{customer:CreateCustomer,ticket:CreateTicket}}/>
           </Route>
         </Router>
       </Provider>, document.body

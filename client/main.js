@@ -11,15 +11,16 @@ import coreModule from './modules/core';
 import commentsModule from './modules/comments';
 import todoModule from './modules/todos';
 import customerModule from './modules/customer';
+import ticketModule from './modules/tickets';
 // Combine Reducers
 const reducer = combineReducers({
   ...coreModule.reducers,
   ...todoModule.reducers,
   ...customerModule.reducers,
+  ...ticketModule.reducers,
   form: formReducer,
   routing: routerReducer
 });
-
 
 
 // Init Context
@@ -31,6 +32,6 @@ app.loadModule(coreModule);
 app.loadModule(commentsModule);
 app.loadModule(todoModule);
 app.loadModule(customerModule);
-
+app.loadModule(ticketModule);
 
 app.init();

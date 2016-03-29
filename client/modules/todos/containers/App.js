@@ -43,7 +43,6 @@ export const composer = ({context}, onData) => {
     todos: []
   });
   return Store.subscribe(() => {
-
     const allState = Store.getState();
     console.log('sub todos container :', allState);
     onData(null, allState);
