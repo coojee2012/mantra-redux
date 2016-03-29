@@ -22,13 +22,17 @@ class SearchBar extends React.Component {
   }
 
   searchCustomer() {
-    const {context,setSearchKey,search} = this.props;
+    const {setSearchKey,search,location,history} = this.props;
     const {searchKeyRef} = this.refs;
+
     if (searchKeyRef.value && searchKeyRef.value.length > 0) {
-      setSearchKey(context, searchKeyRef.value);
-      search(context, searchKeyRef.value);
+      if(!/^\/search/.test(location.pathname)){
+        history.replace('/search/'+searchKeyRef.value);
+      }
+      setSearchKey(searchKeyRef.value);
+      search(searchKeyRef.value)();
     } else {
-      search(null, searchKeyRef);
+      search(searchKeyRef);
     }
   }
 }

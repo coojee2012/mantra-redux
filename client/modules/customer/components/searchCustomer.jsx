@@ -6,7 +6,7 @@ import CreatePanel from './createBtnPanle.jsx';
 class SearchCustomer extends React.Component {
   render() {
     console.log('customer UI :', this.props);
-    const {context,reduxActions,logicActions,visibleLists,searchKey} = this.props;
+    const {setSearchKey,searchCustomers,visibleLists,searchKey,location,history} = this.props;
     return (
       <div className='component'>
         {this.props.customerKey === null ? (<div></div>) : (
@@ -16,21 +16,25 @@ class SearchCustomer extends React.Component {
           </span>返回</div>)}
         <SearchBar searchKey={searchKey}
                    placeHolder='手机/电子邮件/姓名'
-                   setSearchKey={logicActions.setSearchKey}
-                   search={logicActions.searchCustomers}
-                   context={context}/>
+                   setSearchKey={setSearchKey}
+                   search={searchCustomers}
+                   location={location}
+                   history={history}
+        />
         <div className='payload'>
-          { !searchKey ? (<div><CreatePanel logicActions={logicActions} context={context} />
-            <ListTable customers={visibleLists} /></div>):
-            (<div></div>)}
+          { !searchKey ? (<div><CreatePanel {...this.props} />
+            <ListTable customers={visibleLists}/></div>):
+            (<div>3332222</div>)}
         </div>
-
       </div>
     );
   }
 
   goBackToSelectedCustomerDetail() {
-    this.props.gotoBackCustomer(this.props.customerKey);
+    const {history} = this.props;
+    //history.replaceState(null, '/ticket/11');
+    history.replace('/ticket/11')
+    //this.props.gotoBackCustomer(this.props.customerKey);
   }
 
 }

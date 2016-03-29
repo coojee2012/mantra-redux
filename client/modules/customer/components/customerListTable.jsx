@@ -2,6 +2,7 @@ import React from 'react';
 import Row from './customerListTableRow.jsx';
 class CustomerListTable extends React.Component {
   render() {
+    console.log('CustomerListTable UI:', this.props);
     const { customers = [] } = this.props;
     const rows = [];
     for (let customer of customers) {

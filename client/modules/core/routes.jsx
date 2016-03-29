@@ -16,7 +16,6 @@ import CreateCustomer from '../customer/containers/createCustomer';
 import CreateTicket from '../tickets/containers/createTicket';
 
 export default function (injectDeps, {Meteor,Store}) {
-  //const store = ReduxState.Store();
   const history = syncHistoryWithStore(browserHistory, Store);
   const MainLayoutCtx = injectDeps(MainLayout);
   Meteor.startup(() => {
@@ -37,59 +36,3 @@ export default function (injectDeps, {Meteor,Store}) {
     );
   });
 }
-
-/*export default function (injectDeps, {FlowRouter,ReduxState},actions) {
- console.log('actions:',actions);
- const MainLayoutCtx = injectDeps(MainLayout);
- const store = ReduxState.Store();
-
- FlowRouter.route('/', {
- name: 'posts.list',
- action() {
- mount(MainLayoutCtx, {
- store:store,
- content: () => (<PostList />)
- });
- }
- });
-
- FlowRouter.route('/post/:postId', {
- name: 'posts.single',
- action({postId}) {
- mount(MainLayoutCtx, {
- store:store,
- content: () => (<Post postId={postId}/>)
- });
- }
- });
-
- FlowRouter.route('/new-post', {
- name: 'newpost',
- action() {
- mount(MainLayoutCtx, {
- store:store,
- content: () => (<NewPost/>)
- });
- }
- });
-
- FlowRouter.route('/welcome/:name', {
- name: 'welcome',
- action({name}) {
- mount(MainLayoutCtx, {
- store:store,
- content: () => (<Welcome name={name}/>)
- });
- }
- });
-
- FlowRouter.route('/todos', {
- name: 'todos',
- action() {
- mount(MainLayoutCtx, {
- store:store,
- content: () => (<Todo />)
- });
- }
- });
- }*/

@@ -2,6 +2,8 @@ import React from "react";
 import {reduxForm} from 'redux-form';
 import { CustomerInfoFields as fields} from '../configs/const'
 import {Grid,Row,Col,FormControls} from 'react-bootstrap';
+import SearchBar from './searchBar.jsx';
+
 const h3Style = {
   paddingTop: "20px",
   borderBottom: "1px #CEC6C6 solid",
@@ -11,10 +13,27 @@ class CreateCustomer extends React.Component{
 
   render() {
     console.log('create customer UI :', this.props);
-    const {customerInfo,fields: {id,name,username,email,mobile,address,telephone,memo}, handleSubmit} = this.props;
+    const {
+      customerInfo,
+      searchKey,
+      setSearchKey,
+      searchCustomers,
+      location,
+      history,
+      fields: {id,name,username,email,mobile,address,telephone,memo},
+      handleSubmit} = this.props;
     return (
       <Row>
         <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group">
+          <Col>
+            <SearchBar searchKey={searchKey}
+                       placeHolder='手机/电子邮件/姓名'
+                       setSearchKey={setSearchKey}
+                       search={searchCustomers}
+                       location={location}
+                       history={history}
+            />
+            </Col>
           <Col componentClass="form" onSubmit={handleSubmit}>
             <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group" style={h3Style}>
               <span style={{right: "15px"}}>{this.props.CreateCusotmerTitle}</span>

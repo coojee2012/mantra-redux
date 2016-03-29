@@ -25,23 +25,23 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 const onPropsChange = (props, onData) => {
-
   const {context} = props;
   const {Store} = context();
-  console.log('create customer container store:', props,Store);
+  //console.log('create customer container store:', props,Store);
   onData(null, Store.getState().customer);
   return Store.subscribe(() => {
     const allState = Store.getState();
-    console.log('onPropsChange sub customer container :', allState);
-    onData(null, Store.getState().customer);
+    //console.log('onPropsChange sub customer container :', allState);
+    onData(null, allState.customer);
   });
 }
 export const depsMapper = (context, actions) => {
   return {
+    ...actions.customerLogicActions,
     context: () => context
   };
 }
 export default composeAll(
   compose(onPropsChange, Loading, ErrorUI),
   useDeps(depsMapper)
-)(connect(null,mapDispatchToProps)(createCustomerApp));
+)(createCustomerApp);

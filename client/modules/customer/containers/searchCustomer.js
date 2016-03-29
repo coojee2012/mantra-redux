@@ -24,23 +24,26 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const composer = ({context}, onData) => {
+export const onPropsChange = ({context}, onData) => {
   const {Store} = context();
-  console.log('todo container store:', Store);
+  //console.log('todo container store:', Store);
   onData(null, {
     searchKey: '',
-    lists: []
+    visibleLists: []
   });
   return Store.subscribe(() => {
-    const allState = Store.getState();
-    console.log('sub todos container :', allState);
-    onData(null, allState);
+    const state = Store.getState();
+    onData(null, {
+      visibleLists: state['customer']['searchReducer'].customerLists,
+      searchKey: state['customer']['searchReducer'].setSearchKey
+    });
   });
 };
 
 export const depsMapper = (context, actions) => {
-  //console.log('注入action函数:', actions);
+  console.log('注入的action函数:', actions);
   return {
+    ...actions.customerLogicActions,
     context: () => context
   };
 }
@@ -49,6 +52,6 @@ export const depsMapper = (context, actions) => {
 // 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
 //export const App connect(select,mapDispatchToProps)(App);
 export default composeAll(
-  compose(composer,Loading,ErrorUI),
+  compose(onPropsChange,Loading,ErrorUI),
   useDeps(depsMapper)
-)(connect(select, mapDispatchToProps)(searchCustomerApp));
+)(searchCustomerApp);

@@ -8,12 +8,14 @@ import {Tracker} from 'meteor/tracker';
 import {createStore,applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 export default function ({reducer}) {
+  const Store = createStore(reducer, applyMiddleware(thunk));
   return {
     Meteor,
     // FlowRouter,
     Collections,
     LocalState: new ReactiveDict(),
-    Store: createStore(reducer, applyMiddleware(thunk)),
+    Store: Store,
+    dispatch: Store.dispatch,
     //ReduxState: new ReduxState(),
     Tracker
   };
