@@ -1,5 +1,7 @@
-import posts from './posts';
+import coreReduxActions from './reduxActions';
+import coreLogicActions from './logicActions';
 
 export default {
-  posts
+  coreReduxActions,
+  coreLogicActions
 };

@@ -1,7 +1,7 @@
 /**
  * Created by LinYong on 2016/3/11.
  */
-import Welcome from '../components/welcome.jsx';
+import Main from '../components/main.jsx';
 import Loading from '../components/loading.jsx';
 import Error from '../components/error.jsx';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
@@ -16,7 +16,6 @@ const onPropsChange = (props, onData) => {
     let xname = props.name +' '+ new Date();
     onData(null, {name: xname});
   }, 3000);
-
   const cleanup = () => clearInterval(handle);
   return cleanup;
 };
@@ -24,4 +23,4 @@ const onPropsChange = (props, onData) => {
 export default composeAll(
   composeWithTracker(onPropsChange,Loading,Error),
   useDeps()
-)(Welcome);
+)(Main);
