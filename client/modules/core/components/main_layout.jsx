@@ -7,10 +7,10 @@ const App = React.createClass({
     console.log('Main_Layout UI roomId:', this.props.coreReducer.roomId);
     const {history,location,setRoomId}=this.props;
     const openByPhone = (phone)=> {
-      history.replace('/search/' + phone);
+      history.replace('/search/' + phone+'?w=phone');
     }
     const openByChat = (visitorUserName)=> {
-      history.replace('/search/openByChat');
+      history.replace('/search/'+visitorUserName+'?w=chat');
     }
     const changeRoom = (roomId)=> {
       //如果将要打开的房间之前打开过
@@ -19,18 +19,18 @@ const App = React.createClass({
       } else {
         //保存当前房间信息到localstorge
       }
-      setRoomId(new Date().getTime())();
+      setRoomId(roomId)();
 
     }
     if (!window.UnicallPlugin) {
       window.UnicallPlugin = {
         MockListen(eventValue, roomId, eventType = 'phone'){
           if (eventType === 'chat') {
-            changeRoom(roomId);
-            //openByChat(eventValue);
+            setRoomId(roomId)();
+            openByChat(eventValue);
           } else {
-            changeRoom(roomId);
-            //openByPhone(eventValue);
+            setRoomId(roomId)();
+            openByPhone(eventValue);
           }
         }
       }
