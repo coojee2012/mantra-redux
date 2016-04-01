@@ -26,10 +26,17 @@ const App = React.createClass({
       window.UnicallPlugin = {
         MockListen(eventValue, roomId, eventType = 'phone'){
           if (eventType === 'chat') {
+<<<<<<< HEAD
             setRoomId(roomId)();
             openByChat(eventValue);
           } else {
             setRoomId(roomId)();
+=======
+            changeRoom(roomId);
+            openByChat(eventValue);
+          } else {
+            changeRoom(roomId);
+>>>>>>> 20c553e70bfd1c353f2e58123e066587edb5908c
             openByPhone(eventValue);
           }
         }
@@ -42,7 +49,9 @@ const App = React.createClass({
   componentWillUpdate(nextProps, nextState) {
     const {history,location,setRoomId,coreReducer:{roomId}}=this.props;
     const newRoomId = nextProps.coreReducer.roomId;
-    if (roomId != newRoomId && roomId!=='') {
+    if (roomId != newRoomId && roomId !== '') {
+      const states = JSON(nextProps);
+      localStorage.setItem(roomId, states);
       console.log('坐席切换了聊天房间:', roomId, newRoomId);
     }
   },
