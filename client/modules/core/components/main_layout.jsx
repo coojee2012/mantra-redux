@@ -26,17 +26,10 @@ const App = React.createClass({
       window.UnicallPlugin = {
         MockListen(eventValue, roomId, eventType = 'phone'){
           if (eventType === 'chat') {
-<<<<<<< HEAD
             setRoomId(roomId)();
             openByChat(eventValue);
           } else {
-            setRoomId(roomId)();
-=======
-            changeRoom(roomId);
-            openByChat(eventValue);
-          } else {
-            changeRoom(roomId);
->>>>>>> 20c553e70bfd1c353f2e58123e066587edb5908c
+            setRoomId(roomId);
             openByPhone(eventValue);
           }
         }
