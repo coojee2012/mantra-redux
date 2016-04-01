@@ -27,10 +27,10 @@ const App = React.createClass({
         MockListen(eventValue, roomId, eventType = 'phone'){
           if (eventType === 'chat') {
             changeRoom(roomId);
-            //openByChat(eventValue);
+            openByChat(eventValue);
           } else {
             changeRoom(roomId);
-            //openByPhone(eventValue);
+            openByPhone(eventValue);
           }
         }
       }
@@ -42,7 +42,9 @@ const App = React.createClass({
   componentWillUpdate(nextProps, nextState) {
     const {history,location,setRoomId,coreReducer:{roomId}}=this.props;
     const newRoomId = nextProps.coreReducer.roomId;
-    if (roomId != newRoomId && roomId!=='') {
+    if (roomId != newRoomId && roomId !== '') {
+      const states = JSON(nextProps);
+      localStorage.setItem(roomId, states);
       console.log('坐席切换了聊天房间:', roomId, newRoomId);
     }
   },
