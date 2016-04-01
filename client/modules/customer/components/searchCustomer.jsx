@@ -4,6 +4,9 @@ import ListTable from './customerListTable.jsx';
 import CreatePanel from './createBtnPanle.jsx';
 
 class SearchCustomer extends React.Component {
+  componentWillMount(){
+    //TODO 加载历史
+  }
   render() {
     console.log('customer UI :', this.props);
     const {setSearchKey,searchCustomers,visibleLists,searchKey,location,history} = this.props;
@@ -15,12 +18,12 @@ class SearchCustomer extends React.Component {
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true">
           </span>返回</div>)}
         <SearchBar searchKey={searchKey}
-                   placeHolder='手机/电子邮件/姓名'
-                   setSearchKey={setSearchKey}
-                   search={searchCustomers}
-                   location={location}
-                   history={history}
-        />
+                     placeHolder='手机/电子邮件/姓名'
+                     setSearchKey={setSearchKey}
+                     search={searchCustomers}
+                     location={location}
+                     history={history}
+      />
         <div className='payload'>
           { !searchKey ? (<div><CreatePanel {...this.props} />
             <ListTable customers={visibleLists}/></div>):

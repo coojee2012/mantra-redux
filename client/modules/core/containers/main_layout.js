@@ -10,6 +10,7 @@ const onPropsChange = (props, onData) => {
   const {context} = props;
   const {Store} = context();
   onData(null, Store.getState().core);
+  //TODO filter
   return Store.subscribe(() => {
     const allState = Store.getState();
     console.log('onPropsChange sub core container :', allState);
