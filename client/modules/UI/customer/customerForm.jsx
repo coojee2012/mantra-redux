@@ -1,20 +1,18 @@
 import React from "react";
 import {reduxForm} from 'redux-form';
-import { CustomerInfoFields as fields} from '../configs/const'
-import {Grid,Row,Col,FormControls} from 'react-bootstrap';
-import SearchBar from './searchBar.jsx';
-import UI from '../../UI'
+import {Grid, Row, Col, FormControls} from 'react-bootstrap';
+
 
 const h3Style = {
   paddingTop: "20px",
   borderBottom: "1px #CEC6C6 solid",
   paddingBottom: "10px"
 };
-class CreateCustomer extends React.Component{
+const CustomerInfoFields = ['id', 'name', 'username', 'email', 'mobile', 'address', 'telephone', 'memo'];
+class CreateCustomer extends React.Component {
 
   render() {
     console.log('create customer UI :', this.props);
-    const {SearchBar, Customer:{customerForm}}=UI;
     const {
       customerInfo,
       searchKey,
@@ -22,20 +20,12 @@ class CreateCustomer extends React.Component{
       searchCustomers,
       location,
       history,
-      fields: {id,name,username,email,mobile,address,telephone,memo},
-      handleSubmit} = this.props;
+      fields: {id, name, username, email, mobile, address, telephone, memo},
+      handleSubmit
+    } = this.props;
     return (
       <Row>
         <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group">
-          <Col>
-            <SearchBar searchKey={searchKey}
-                       placeHolder='手机/电子邮件/姓名'
-                       setSearchKey={setSearchKey}
-                       search={searchCustomers}
-                       location={location}
-                       history={history}
-            />
-            </Col>
           <Col componentClass="form" onSubmit={handleSubmit}>
             <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group" style={h3Style}>
               <span style={{right: "15px"}}>{this.props.CreateCusotmerTitle}</span>
@@ -47,34 +37,34 @@ class CreateCustomer extends React.Component{
             </div>
             <div className="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
               <label htmlFor="exampleInputEmail1">姓名</label>
-              <input type="text" {...name}  className="form-control"  placeholder="姓名"   maxLength="16"/>
+              <input type="text" {...name} className="form-control" placeholder="姓名" maxLength="16"/>
             </div>
             <div className="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
               <label htmlFor="email">邮件</label>
-              <input type="text" className="form-control"  placeholder="邮件" {...email}
+              <input type="text" className="form-control" placeholder="邮件" {...email}
                      onChange={this.emailChangeFn} maxLength="32"/>
             </div>
             <div className="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
               <label htmlFor="mobile">手机</label>
-              <input  type="text" className="form-control"
+              <input type="text" className="form-control"
                      ref="mobile" {...mobile}
-                      onChange={this.emailChangeFn}
+                     onChange={this.emailChangeFn}
                      placeholder="手机" maxLength="32"/>
             </div>
             <div className="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
               <label htmlFor="address">地址</label>
-              <input onChange={this.addressFn}  type="text" className="form-control"
+              <input onChange={this.addressFn} type="text" className="form-control"
                      id="address" placeholder="地址" maxLength="128"/>
             </div>
             <div className="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
               <label htmlFor="telephone">电话</label>
-              <input onChange={this.telephoneChangeFn}  type="text"
+              <input onChange={this.telephoneChangeFn} type="text"
                      className="form-control"
                      id="telephone" placeholder="电话" maxLength="32"/>
             </div>
             <div className="form-group col-lg-12 col-md-12 col-xs-12 col-sm-12">
               <label htmlFor="memo">备注</label>
-              <textarea  ref="memo" className="form-control"
+              <textarea ref="memo" className="form-control"
                         onChange={this.memoChangeFn}
                         maxLength="500">
               </textarea>
@@ -89,8 +79,8 @@ class CreateCustomer extends React.Component{
                           onClick={this.save}>保存
                   </button>
                 </div>
-                }
-              })()}
+              }
+            })()}
           </Col>
         </div>
         <div>
@@ -100,27 +90,35 @@ class CreateCustomer extends React.Component{
 
     );
   }
+
   handleChange(event) {
     this.setState({value: event.target.value});
   }
-  showBtns(){
+
+  showBtns() {
 
   }
-  memoChangeFn(e){
+
+  memoChangeFn(e) {
 
   }
-  mobileFn(e){
+
+  mobileFn(e) {
 
   }
-  telephoneChangeFn(e){
+
+  telephoneChangeFn(e) {
 
   }
-  addressFn(e){
+
+  addressFn(e) {
 
   }
-  gotoContact(){
+
+  gotoContact() {
 
   }
+
   save() {
 
   }
@@ -128,16 +126,18 @@ class CreateCustomer extends React.Component{
   cancelCreateCustomer() {
 
   }
+
   nameChangeFn(e) {
 
   }
+
   emailChangeFn(e) {
 
   }
 
-};
+}
 //export default CreateCustomer;
 export default reduxForm({
   form: 'CreateCustomer',
-  fields
+  fields: CustomerInfoFields
 })(CreateCustomer);

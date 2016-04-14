@@ -10,18 +10,18 @@ class SearchBar extends React.Component {
                  placeholder={this.props.placeHolder}
                  onKeyUp={this.onKeyUp.bind(this)}/>
         </div>
-        <div className='searchClick' onClick={this.searchCustomer.bind(this)}></div>
+        <div className='searchClick' onClick={this.doSearch.bind(this)}></div>
       </div>
     );
   }
 
   onKeyUp(e) {
     if (e.keyCode === 13) {
-      this.searchCustomer();
+      this.doSearch();
     }
   }
 
-  searchCustomer() {
+  doSearch() {
     const {setSearchKey,search,location,history} = this.props;
     const {searchKeyRef} = this.refs;
 

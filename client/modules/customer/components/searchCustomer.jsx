@@ -1,32 +1,32 @@
 import React from 'react';
-import SearchBar from './searchBar.jsx';
-import ListTable from './customerListTable.jsx';
-import CreatePanel from './createBtnPanle.jsx';
+import UI from '../../UI'
 
 class SearchCustomer extends React.Component {
-  componentWillMount(){
+  componentWillMount() {
     //TODO 加载历史
   }
+
   render() {
-    console.log('customer UI :', this.props);
-    const {setSearchKey,searchCustomers,visibleLists,searchKey,location,history} = this.props;
+    const {SearchBar, Customer:{createBtnPanle, customerListTable}}=UI;
+    console.log('customer UI :', this.props,);
+    const {setSearchKey, searchCustomers, visibleLists, searchKey, location, history} = this.props;
     return (
       <div className='component'>
         {this.props.customerKey === null ? (<div></div>) : (
-        <div style={{position: 'absolute',top: '50px',fontSize: '16px',cursor: 'pointer'}}
-             onClick={this.goBackToSelectedCustomerDetail.bind(this)}>
+          <div style={{position: 'absolute',top: '50px',fontSize: '16px',cursor: 'pointer'}}
+               onClick={this.goBackToSelectedCustomerDetail.bind(this)}>
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true">
           </span>返回</div>)}
         <SearchBar searchKey={searchKey}
-                     placeHolder='手机/电子邮件/姓名'
-                     setSearchKey={setSearchKey}
-                     search={searchCustomers}
-                     location={location}
-                     history={history}
-      />
+                      placeHolder='手机/电子邮件/姓名'
+                      setSearchKey={setSearchKey}
+                      search={searchCustomers}
+                      location={location}
+                      history={history}
+        />
         <div className='payload'>
-          { !searchKey ? (<div><CreatePanel {...this.props} />
-            <ListTable customers={visibleLists}/></div>):
+          { !searchKey ? (<div><createBtnPanle {...this.props} />
+            <customerListTable customers={visibleLists}/></div>) :
             (<div>3332222</div>)}
         </div>
       </div>

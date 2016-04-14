@@ -7,8 +7,7 @@ import { connect } from 'react-redux';
 import reduxActionCreators from '../actions/reduxActions';
 import logicActionCreators from '../actions/logicActions';
 import searchCustomerApp from '../components/searchCustomer.jsx';
-import Loading from '../components/loading.jsx';
-import ErrorUI from '../components/error.jsx';
+import {Error, Loading} from '../../UI';
 
 function select(state) {
   console.log('state:', state);
@@ -52,6 +51,6 @@ export const depsMapper = (context, actions) => {
 // 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
 //export const App connect(select,mapDispatchToProps)(App);
 export default composeAll(
-  compose(onPropsChange,Loading,ErrorUI),
+  compose(onPropsChange,Loading,Error),
   useDeps(depsMapper)
 )(searchCustomerApp);

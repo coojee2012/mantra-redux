@@ -2,8 +2,7 @@
  * Created by LinYong on 2016/3/11.
  */
 import Main_Layout from '../components/main_layout.jsx';
-import Loading from '../components/loading.jsx';
-import Error from '../components/error.jsx';
+import {Error, Loading} from '../../UI';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
 const onPropsChange = (props, onData) => {

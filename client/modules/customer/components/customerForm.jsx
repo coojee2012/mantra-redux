@@ -3,7 +3,6 @@ import {reduxForm} from 'redux-form';
 import { CustomerInfoFields as fields} from '../configs/const'
 import {Grid,Row,Col,FormControls} from 'react-bootstrap';
 import SearchBar from './searchBar.jsx';
-import UI from '../../UI'
 
 const h3Style = {
   paddingTop: "20px",
@@ -14,7 +13,6 @@ class CreateCustomer extends React.Component{
 
   render() {
     console.log('create customer UI :', this.props);
-    const {SearchBar, Customer:{customerForm}}=UI;
     const {
       customerInfo,
       searchKey,
