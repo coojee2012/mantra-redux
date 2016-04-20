@@ -23,6 +23,7 @@ export default {
     return () => {
       Meteor.call('customer.search', key, (err, result) => {
         console.log('customer.search:', err, result);
+        dispatch(customerReduxActions.setSearchKey(key));
         dispatch(customerReduxActions.search(result));
       });
     };

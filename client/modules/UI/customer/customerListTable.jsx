@@ -1,12 +1,12 @@
 import React from 'react';
-import Row from './customerListTableRow.jsx';
+import CustomerListTableRow from './customerListTableRow.jsx';
 class CustomerListTable extends React.Component {
   render() {
     console.log('CustomerListTable UI:', this.props);
     const { customers = [] } = this.props;
     const rows = [];
     for (let customer of customers) {
-      rows.push(<Row customer={customer}/>);
+      rows.push(<CustomerListTableRow customer={customer}/>);
     }
     return (
       <table className="table table-hover" style={{width: '80%',margin: '0 auto'}}>

@@ -1,5 +1,20 @@
 import React from 'react';
 class SearchBar extends React.Component {
+  componentDidMount() {
+    //TODO 加载历史
+    console.log('SearchBar UI componentDidMount :', this.props);
+    const {search} = this.props;
+    const {searchKeyRef} = this.refs;
+    search(searchKeyRef.value)();
+
+  }
+ /* componentDidUpdate( nextProps,  nextState){
+    console.log('====',nextProps,  nextState);
+    console.log('SearchBar UI componentDidUpdate :', this.props);
+    const {search} = this.props;
+    const {searchKeyRef} = this.refs;
+    search(searchKeyRef.value)();
+  }*/
   render() {
     console.log('SearchBar UI :', this.props);
     return (
@@ -22,17 +37,11 @@ class SearchBar extends React.Component {
   }
 
   doSearch() {
-    const {setSearchKey,search,location,history} = this.props;
+    const {search,history} = this.props;
     const {searchKeyRef} = this.refs;
-
     if (searchKeyRef.value && searchKeyRef.value.length > 0) {
-      if(!/^\/search/.test(location.pathname)){
         history.replace('/search/'+searchKeyRef.value);
-      }
-      setSearchKey(searchKeyRef.value);
-      search(searchKeyRef.value)();
-    } else {
-      search(searchKeyRef);
+        search(searchKeyRef.value)();
     }
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 class CreateBtnPanle extends React.Component {
   render() {
+    console.log('CreateBtnPanle UI:', this.props);
     return (
       <div className='resultTool'>
         <div className='plzSelect'>请选择联系人</div>

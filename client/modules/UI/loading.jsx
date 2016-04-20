@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loading = () => (
   <div>
-    <b> 我是在等待....一个女孩.... </b>
+    <b> 数据正在努力加载中......亲,请耐心等待...... </b>
   </div>
 );
 

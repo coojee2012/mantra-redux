@@ -1,15 +1,15 @@
 /**
  * Created by linyong on 16/4/13.
  */
-import createBtnPanle from './createBtnPanle.jsx';
+import CreateBtnPanle from './createBtnPanle.jsx';
 import customerForm from './customerForm.jsx';
-import customerListTable from './customerListTable.jsx';
-import customerListTableRow from './customerListTableRow.jsx';
+import CustomerListTable from './customerListTable.jsx';
+import CustomerListTableRow from './customerListTableRow.jsx';
 import flipBar from './flipBar.jsx';
 export default {
   flipBar,
-  createBtnPanle,
+  CreateBtnPanle,
   customerForm,
-  customerListTable,
-  customerListTableRow
+  CustomerListTable,
+  CustomerListTableRow
 }
