@@ -1,7 +1,10 @@
-
+//@puw
 import React, {Component, PropTypes} from 'react';
 import {Grid,Row,Col,Button} from 'react-bootstrap';
 import {reduxForm} from 'redux-form';
+
+import UI from '../../UI'
+import {Logger} from '../../tools';
 
 import TicketsSelect from './ticketsSelect.jsx';
 
@@ -59,8 +62,9 @@ class CreateTickets extends Component {
       resetForm,
       submitting,
       } = this.props;
-
+    const {SearchBar, Customer:{CustomerForm, FlipBar}}=UI;
     return (
+  
       <Col componentClass="form" xs={12} onSubmit={handleSubmit(this.submit.bind(this))}>
         <Row>
           <Col xs={12} sm={12} className="form-group" style={h3Style}>

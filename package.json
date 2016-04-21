@@ -27,6 +27,10 @@
   },
   "dependencies": {
     "domready": "^1.0.8",
+    "lodash": "^4.6.1",
+    "autosize": "^3.0.15",
+    "classnames": "^2.2.3",
+    "log4js": "^0.6.32",
     "mantra-core": "^1.2.0",
     "react": "^0.14.6",
     "react-bootstrap": "^0.28.3",

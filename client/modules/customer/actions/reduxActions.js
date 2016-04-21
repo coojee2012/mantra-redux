@@ -1,4 +1,4 @@
-import { CUSTOMER_SEARCH,CUSTOMER_SEARCH_KEY,CUSTOMER_CREATE,CUSTOMER_SAVING,CUSTOMER_SAVE_DONE,CUSTOMER_EDIT} from './actionTypes';
+import { CUSTOMER_SEARCH,CUSTOMER_SEARCH_KEY,CUSTOMER_CREATE,CUSTOMER_SAVING,CUSTOMER_SAVE_DONE,CUSTOMER_EDIT,CUSTOMER_SAVE_ERROR,CUSTOMER_SAVE_RESET} from './actionTypes';
 export default {
   search(key) {
     console.log('In redux action fn:',key);
@@ -7,16 +7,22 @@ export default {
   setSearchKey(key) {
     return {type: CUSTOMER_SEARCH_KEY, key};
   },
-  createCustomerSaving(key){
-    return {type: CUSTOMER_SAVING, key};
+  createCustomerSaving(){
+    return {type: CUSTOMER_SAVING};
   },
-  createCustomerSaved(key){
-    return {type: CUSTOMER_SAVE_DONE, key};
+  createCustomerSaved(){
+    return {type: CUSTOMER_SAVE_DONE};
   },
-  createCustomerNew(key){
-    return {type: CUSTOMER_CREATE, key};
+  resetCustomerSaveStatus(){
+    return {type: CUSTOMER_SAVE_RESET};
   },
-  editCustomer(key){
-    return {type: CUSTOMER_EDIT, key};
+  saveCustomerError(){
+    return {type: CUSTOMER_SAVE_ERROR};
+  },
+  createCustomerNew(data){
+    return {type: CUSTOMER_CREATE, data};
+  },
+  editCustomer(data){
+    return {type: CUSTOMER_EDIT, data};
   }
 };

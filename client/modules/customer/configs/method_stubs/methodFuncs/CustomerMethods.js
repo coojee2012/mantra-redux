@@ -6,6 +6,13 @@ const test = ({Collections, Meteor}, key) => {
     resolve(key);
   });
 }
-export default {
-  test
+
+const create = ({Collections, Meteor}, data) => {
+  return new Promise((resolve, reject)=> {
+    resolve(data);
+  });
+}
+export  {
+  test,
+  create
 };

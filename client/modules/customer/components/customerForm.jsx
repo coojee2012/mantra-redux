@@ -134,8 +134,8 @@ class CreateCustomer extends React.Component{
   }
 
 };
-//export default CreateCustomer;
+//export default CustomerForm;
 export default reduxForm({
-  form: 'CreateCustomer',
+  form: 'CustomerForm',
   fields
 })(CreateCustomer);

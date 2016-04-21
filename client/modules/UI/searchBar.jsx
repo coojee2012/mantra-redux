@@ -1,8 +1,9 @@
 import React from 'react';
+import {Logger} from '../tools';
 class SearchBar extends React.Component {
   componentDidMount() {
     //TODO 加载历史
-    console.log('SearchBar UI componentDidMount :', this.props);
+    Logger({msg:'SearchBar UI componentDidMount :', props:this.props});
     const {search} = this.props;
     const {searchKeyRef} = this.refs;
     search(searchKeyRef.value)();
@@ -16,7 +17,7 @@ class SearchBar extends React.Component {
     search(searchKeyRef.value)();
   }*/
   render() {
-    console.log('SearchBar UI :', this.props);
+    Logger({msg:'SearchBar UI  :', props:this.props});
     return (
       <div className='toolBar'>
         <div>

@@ -23,7 +23,7 @@ export default function (injectDeps, {Meteor,Store}) {
             <Route path="search(/:key)" component={SearchCustomer}/>
             <Route path="customer/create" component={CreateCustomer}>
             </Route>
-            <Route path="ticket(/:cid)" components={{customer:CreateCustomer,ticket:CreateTicket}}/>
+            <Route path="ticket(/:cid)" components={CreateTicket}/>
           </Route>
         </Router>
       </Provider>, document.body

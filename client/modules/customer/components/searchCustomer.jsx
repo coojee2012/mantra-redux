@@ -1,15 +1,15 @@
 import React from 'react';
 import UI from '../../UI';
-
+import {Logger} from '../../tools';
 class SearchCustomer extends React.Component {
   componentWillMount() {
     //TODO 加载历史
-    console.log('customer UI componentWillMount :', this.props);
+    Logger({msg: 'customer search UI componentWillMount :', props: this.props});
   }
 
   render() {
-    const {SearchBar, Loading,Customer:{CreateBtnPanle, CustomerListTable}}=UI;
-    console.log('customer UI :', this.props);
+    const {SearchBar, Loading, Customer:{CreateBtnPanle, CustomerListTable}}=UI;
+    Logger({msg: 'customer search  UI :', props: this.props});
     const {setSearchKey, searchCustomers, visibleLists, searchKey, location, history} = this.props;
 
     return (
@@ -20,13 +20,13 @@ class SearchCustomer extends React.Component {
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true">
           </span>返回</div>)}
         <SearchBar searchKey={searchKey || this.props.params.key}
-                      placeHolder='手机/电子邮件/姓名'
-                      search={searchCustomers}
-                      location={location}
-                      history={history}
+                   placeHolder='手机/电子邮件/姓名'
+                   search={searchCustomers}
+                   location={location}
+                   history={history}
         />
         <div className='payload'>
-          { searchKey!='' ? (
+          { searchKey != '' ? (
             <div>
               <CreateBtnPanle {...this.props} />
               <CustomerListTable customers={visibleLists}/>

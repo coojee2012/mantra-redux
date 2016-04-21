@@ -2,7 +2,7 @@
  * Created by LinYong on 2016/3/28.
  */
 import { useDeps, compose, composeAll } from 'mantra-core';
-import createCustomerApp from '../components/customerForm.jsx';
+import createCustomer from '../components/createCustomer.jsx';
 import {Error, Loading} from '../../UI';
 import {Logger} from '../../tools';
 
@@ -27,4 +27,4 @@ export const depsMapper = (context, actions) => {
 export default composeAll(
   compose(onPropsChange, Loading, Error),
   useDeps(depsMapper)
-)(createCustomerApp);
+)(createCustomer);

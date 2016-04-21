@@ -3,6 +3,6 @@
  */
 
 import Logger from './logger';
-export default {
+export  {
   Logger
 }

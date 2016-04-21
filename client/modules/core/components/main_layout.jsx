@@ -52,7 +52,6 @@ const App = React.createClass({
     console.log('====componentDidUpdate:', preProps.coreReducer.roomId, preState);
   },
   render() {
-    const {location} = this.props;
     return (
       <div>
         <header>
@@ -64,11 +63,6 @@ const App = React.createClass({
         </header>
         <div className="container-fluid">
           {
-            /^\/ticket/.test(location.pathname)?
-              (<div className="row">
-                {this.props.customer}
-                {this.props.ticket}
-              </div>):
               this.props.children
             }
         </div>

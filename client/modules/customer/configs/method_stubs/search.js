@@ -1,8 +1,8 @@
-import searchFns from './methodFuncs/searchCustomer';
+import {test} from './methodFuncs/CustomerMethods';
 export default function ({Collections, Meteor}) {
   Meteor.methods({
     'customer.search'(key) {
-      return searchFns.test({Collections, Meteor},key);
+      return test({Collections, Meteor},key);
     }
   });
 }

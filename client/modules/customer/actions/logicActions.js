@@ -3,7 +3,7 @@
  */
 import customerReduxActions from './reduxActions';
 export default {
-  search({Meteor,dispatch}, key) {
+  search({Meteor, dispatch}, key) {
     return () => {
       console.log('In loginc action :', key);
       setTimeout(() => {
@@ -11,7 +11,7 @@ export default {
       }, 1000);
     };
   },
-  setSearchKey({Meteor,dispatch}, key) {
+  setSearchKey({Meteor, dispatch}, key) {
     return () => {
       console.log('In loginc action setSearchKey:', key, Meteor);
       setTimeout(() => {
@@ -19,7 +19,12 @@ export default {
       }, 1000);
     };
   },
-  searchCustomers({Meteor,dispatch}, key) {
+  resetSaveStatus({Meteor, dispatch}){
+    return()=>{
+      dispatch(customerReduxActions.resetCustomerSaveStatus());
+    }
+  },
+  searchCustomers({Meteor, dispatch}, key) {
     return () => {
       Meteor.call('customer.search', key, (err, result) => {
         console.log('customer.search:', err, result);
@@ -28,11 +33,18 @@ export default {
       });
     };
   },
-  addCustomer({Meteor,dispatch}, key) {
-    return () => {
-      Meteor.call('customer.search', key, (err, result) => {
-        console.log('customer.search:', err, result);
-        dispatch(customerReduxActions.createCustomerNew(result));
+  addCustomer({Meteor, dispatch}, data) {
+    return (callback) => {
+      dispatch(customerReduxActions.createCustomerSaving());
+      Meteor.call('customer.create', data, (err, result) => {
+        if (err) {
+          dispatch(customerReduxActions.saveCustomerError());
+        } else {
+          dispatch(customerReduxActions.createCustomerNew(result));
+          dispatch(customerReduxActions.createCustomerSaved());
+
+        }
+        callback(err, result);
       });
     };
   }

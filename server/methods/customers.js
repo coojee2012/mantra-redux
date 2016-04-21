@@ -25,6 +25,14 @@ export default function () {
           resolve(data);
         }, 3000);
       });
+    },
+    'customer.create'(data) {
+      check(data, Object);
+      console.log('create customer method:', data);
+      return new Promise((resolve, reject) => {
+        data.id="111111-111111";
+        resolve(data);
+      });
     }
   });
 }
