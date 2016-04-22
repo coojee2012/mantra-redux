@@ -13,7 +13,7 @@ class FlipBar extends React.Component {
     return (<div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group" style={h3Style}>
       <span style={{right: "15px"}}>联系人详情</span>
       <span>
-        <span style={{float:"right",cursor:'pointer'}} onClick={this.gotoContact}>定位联系人
+        <span style={{float:"right",cursor:'pointer'}} onClick={this.gotoContact}>+定位联系人
           <span className="glyphicon glyphicon-search">
           </span>
         </span>

@@ -4,10 +4,11 @@ class SearchBar extends React.Component {
   componentDidMount() {
     //TODO 加载历史
     Logger({msg:'SearchBar UI componentDidMount :', props:this.props});
-    const {search} = this.props;
-    const {searchKeyRef} = this.refs;
-    search(searchKeyRef.value)();
-
+    const {search,mountAndSearch} = this.props;
+    if(mountAndSearch){
+      const {searchKeyRef} = this.refs;
+      search(searchKeyRef.value)();
+    }
   }
  /* componentDidUpdate( nextProps,  nextState){
     console.log('====',nextProps,  nextState);

@@ -7,7 +7,13 @@ import ObjTools from 'lodash/fp/object';
 
 const CustomerInfoFields = ['id', 'name', 'username', 'email', 'mobile', 'address', 'telephone', 'memo'];
 class CustomerForm extends React.Component {
-
+  componentDidUpdate(preProps) {
+    //初始化用户信息
+    if(this.props.customerInfo && this.props.customerInfo.id != '' && this.props.customerInfo.id != preProps.customerInfo.id){
+    this.props.initializeForm(this.props.customerInfo);
+    }
+ 
+  }
   render() {
     Logger({msg: 'customer form UI :', props: this.props});
     const {
@@ -50,6 +56,8 @@ class CustomerForm extends React.Component {
               <textarea ref="memo" className="form-control" {...memo}
                         maxLength="500">
               </textarea>
+            <input type="hidden" name="id" {...id}/>
+            <input type="hidden" name="username" {...username}/>
           </div>
           {(()=> {
             if (true) {
@@ -88,7 +96,7 @@ class CustomerForm extends React.Component {
       }else{
         Logger({msg:"showMsg", data:[{msgType: 1, msgContent: "添加成功"}]});
         //resetForm();
-        
+
       }
     });
   }

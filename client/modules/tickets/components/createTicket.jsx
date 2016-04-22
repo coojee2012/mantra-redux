@@ -10,6 +10,9 @@ import {Logger} from '../../tools';
 class CreateTickets extends Component {
   componentWillMount() {
     //初始化值
+    if(this.props.params.cid){
+      this.props.LogicActions.initCustomer(this.props.params.cid);
+    }
     //this.props.initializeForm(this.props.createReducer.create);
   }
 
@@ -23,7 +26,7 @@ class CreateTickets extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('====', nextProps, nextState);
+    //console.log('====', nextProps, nextState);
     //初始化值 初次加载或路由变更后 @TODO 临时解决路由更新后表单不更新,待寻找更优的方式.
     //if(this.props.values.contactId != this.props.defaultValues.contactId){
     //this.props.initializeForm(this.props.createReducer.create);
@@ -61,22 +64,21 @@ class CreateTickets extends Component {
     };
     const {
       //fields: {subject, type, ticketState, priority, groups, agents, description, contactId},
-      LogicActions:{createTicket},
-      handleSubmit,
-      resetForm,
+      LogicActions:{createTicket,editCustomer},
+      createReducer:{customerInfo,editCustomerStatus},
       searchKey,
       searchCustomers,
-      editCustomer,
       location,
-      history,
-      submitting,
+      history
     } = this.props;
+
     const {SearchBar, Customer:{CustomerForm}, Tickets:{TicketForm, FlipBar}}=UI;
     return (
       <Row>
         <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group">
           <Col>
             <SearchBar searchKey={searchKey}
+                       mountAndSearch={false}
                        placeHolder='手机/电子邮件/姓名'
                        search={searchCustomers}
                        location={location}
@@ -88,7 +90,9 @@ class CreateTickets extends Component {
           </Col>
           <Col >
             <CustomerForm
-              saveCustomer={editCustomer}
+              customerInfo={customerInfo}
+              saveCustomer={this.props.LogicActions.editCustomer}
+              
             />
           </Col>
           <Col>

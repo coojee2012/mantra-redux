@@ -40,7 +40,7 @@ class TicketFrom extends Component {
 
   }
   render() {
-    console.log('ticket UI:',this.props);
+    console.log('Ticket Form UI:',this.props);
     propTypes = {
       fields: PropTypes.object.isRequired,
       handleSubmit: PropTypes.func.isRequired,

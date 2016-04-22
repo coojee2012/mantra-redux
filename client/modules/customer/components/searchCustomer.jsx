@@ -20,6 +20,7 @@ class SearchCustomer extends React.Component {
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true">
           </span>返回</div>)}
         <SearchBar searchKey={searchKey || this.props.params.key}
+                   mountAndSearch={true}
                    placeHolder='手机/电子邮件/姓名'
                    search={searchCustomers}
                    location={location}

@@ -16,6 +16,17 @@ export const TicketInfo =
   description: "",
   contactId: ""
 }
+export const CustomerInfo =
+{
+  id: "",
+  name: "",
+  username: "",
+  email: "",
+  mobile: "",
+  address: "",
+  telephone: "",
+  memo: ""
+}
 export const  TicketInfoFields=['subject','type','ticketState','priority','groups','agents','description','contactId'];
-
+export const  CustomerInfoFields=['id','name','username','email','mobile','address','telephone','memo'];
 

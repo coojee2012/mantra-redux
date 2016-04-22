@@ -40,6 +40,7 @@ class CreateCustomer extends React.Component {
         <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group">
           <Col>
             <SearchBar searchKey={searchKey}
+                       mountAndSearch={false}
                        placeHolder='手机/电子邮件/姓名'
                        search={searchCustomers}
                        location={location}
