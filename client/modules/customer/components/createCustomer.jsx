@@ -52,6 +52,7 @@ class CreateCustomer extends React.Component {
           </Col>
           <Col >
             <CustomerForm
+              dynamicShowBtn={false}
               saveCustomer={addCustomer}
             />
 

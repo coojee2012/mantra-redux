@@ -24,12 +24,16 @@ export default {
       dispatch(customerReduxActions.resetCustomerSaveStatus());
     }
   },
-  searchCustomers({Meteor, dispatch}, key) {
+  searchCustomers({Meteor, dispatch}, key,isAuto=false) {
     return () => {
-      Meteor.call('customer.search', key, (err, result) => {
+      Meteor.call('customer.search', key,(err, result) => {
         console.log('customer.search:', err, result);
         dispatch(customerReduxActions.setSearchKey(key));
         dispatch(customerReduxActions.search(result));
+        if(isAuto){
+          dispatch(customerReduxActions.setAutoSearchDone());
+        }
+
       });
     };
   },

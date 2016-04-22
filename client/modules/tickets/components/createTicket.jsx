@@ -13,6 +13,7 @@ class CreateTickets extends Component {
     if(this.props.params.cid){
       this.props.LogicActions.initCustomer(this.props.params.cid);
     }
+    this.props.LogicActions.initSelectOptions();
     //this.props.initializeForm(this.props.createReducer.create);
   }
 
@@ -33,21 +34,6 @@ class CreateTickets extends Component {
     // }
   }
 
-  submit(values) {
-
-  }
-
-  clickSubmit() {
-
-  }
-
-  changeGroup(e) {
-
-  }
-
-  create() {
-
-  }
 
   render() {
     console.log('ticket UI:', this.props);
@@ -65,7 +51,7 @@ class CreateTickets extends Component {
     const {
       //fields: {subject, type, ticketState, priority, groups, agents, description, contactId},
       LogicActions:{createTicket,editCustomer},
-      createReducer:{customerInfo,editCustomerStatus},
+      createReducer:{customerInfo,editCustomerStatus,selectOptions},
       searchKey,
       searchCustomers,
       location,
@@ -90,13 +76,17 @@ class CreateTickets extends Component {
           </Col>
           <Col >
             <CustomerForm
+              dynamicShowBtn={true}
               customerInfo={customerInfo}
-              saveCustomer={this.props.LogicActions.editCustomer}
-              
+              saveCustomer={editCustomer}
+
             />
           </Col>
           <Col>
-            <TicketForm></TicketForm>
+            <TicketForm
+              selectOptions={selectOptions}
+              saveTickets={createTicket}
+            />
           </Col>
         </div>
       </Row>

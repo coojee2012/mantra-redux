@@ -1,4 +1,11 @@
-import {TICKET_CREATE, TICKET_INFO, TICKET_SAVING, TICKET_SAVE_DONE, TICKET_CREATE_ERROR} from './actionTypes';
+import {
+  TICKET_CREATE,
+  TICKET_INFO,
+  TICKET_SAVING,
+  TICKET_SAVE_DONE,
+  TICKET_CREATE_ERROR,
+  TICKET_INIT_SELECT_OPTIONS
+} from './actionTypes';
 import {
   TICKET_EDITTING_CUSTOMER,
   TICKET_EDIT_CUSTOMER_DONE,
@@ -49,5 +56,9 @@ export default {
   },
   editCustomerStatusReset(){
     return {type: TICKET_EDIT_CUSTOMER_RESET};
+  },
+  initSelectOptions(data){
+    return {type: TICKET_INIT_SELECT_OPTIONS,data};
+
   }
 };

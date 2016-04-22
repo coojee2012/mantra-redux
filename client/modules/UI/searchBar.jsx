@@ -7,7 +7,7 @@ class SearchBar extends React.Component {
     const {search,mountAndSearch} = this.props;
     if(mountAndSearch){
       const {searchKeyRef} = this.refs;
-      search(searchKeyRef.value)();
+      search(searchKeyRef.value,true)();
     }
   }
  /* componentDidUpdate( nextProps,  nextState){

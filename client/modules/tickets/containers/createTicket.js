@@ -2,12 +2,9 @@
  * Created by LinYong on 2016/3/28.
  */
 import { useDeps, compose, composeAll } from 'mantra-core';
-import { bindActionCreators } from 'redux';
-import reduxActionCreators from '../actions/reduxActions';
-import logicActionCreators from '../actions/logicActions';
-import CreateTicketApp from '../components/createTicket.jsx';
-import Loading from '../components/loading.jsx';
-import ErrorUI from '../components/error.jsx';
+import CreateTicket from '../components/createTicket.jsx';
+import {Error, Loading} from '../../UI';
+import {Logger} from '../../tools';
 
 const onPropsChange = (props, onData) => {
   const {context} = props;
@@ -28,7 +25,7 @@ export const depsMapper = (context, actions) => {
   };
 }
 export default composeAll(
-  compose(onPropsChange, Loading, ErrorUI),
+  compose(onPropsChange, Loading, Error),
   useDeps(depsMapper)
-)(CreateTicketApp);
+)(CreateTicket);
 

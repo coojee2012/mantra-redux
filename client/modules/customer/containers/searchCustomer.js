@@ -33,6 +33,7 @@ export const onPropsChange = ({context}, onData) => {
   return Store.subscribe(() => {
     const state = Store.getState();
     onData(null, {
+      autoSearchStatus: state['customer']['searchReducer'].autoSearchStatus,
       visibleLists: state['customer']['searchReducer'].customerLists,
       searchKey: state['customer']['searchReducer'].setSearchKey
     });

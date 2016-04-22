@@ -5,8 +5,23 @@ class SearchCustomer extends React.Component {
   componentWillMount() {
     //TODO 加载历史
     Logger({msg: 'customer search UI componentWillMount :', props: this.props});
-  }
 
+    
+  }
+  componentDidUpdate(preProps) {
+    const {visibleLists,history,autoSearchStatus} = this.props;
+    if (this.props.params.auto === 'yes' && autoSearchStatus === 1) {
+      Logger("自动搜索=====");
+      if(visibleLists.length === 0){
+        Logger({msg: "自动搜索没有发现联系人!!"});
+        history.replace('/customer/create');
+      }
+      else if(visibleLists.length === 1){
+        Logger({msg: "自动搜索发现只有一个联系人!!"});
+        history.replace('/ticket/' + this.props.visibleLists[0].id);
+      }
+    }
+  }
   render() {
     const {SearchBar, Loading, Customer:{CreateBtnPanle, CustomerListTable}}=UI;
     Logger({msg: 'customer search  UI :', props: this.props});
@@ -30,7 +45,7 @@ class SearchCustomer extends React.Component {
           { searchKey != '' ? (
             <div>
               <CreateBtnPanle {...this.props} />
-              <CustomerListTable customers={visibleLists}/>
+              <CustomerListTable customers={visibleLists} auto={this.props.params.auto || 'no'}/>
             </div>) :
             (<div><Loading></Loading></div>)}
         </div>

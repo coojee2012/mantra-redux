@@ -3,21 +3,22 @@
  */
 import ReduxActions from './reduxActions';
 export default {
-  createTicket(context, key) {
+  createTicket(context, data) {
+    const {Meteor, Store} = context;
+    const dispatch = Store.dispatch;
+    dispatch(ReduxActions.createTicketSaving());
+    return (callback) => {
+        Meteor.call('ticket.create', data, (err, result) => {
+          console.log('ticket.create:', err, result);
+          if (err) {
+            dispatch(ReduxActions.createTicketError(err));
+          } else {
+            dispatch(ReduxActions.createTicket(result));
+            dispatch(ReduxActions.createTicketSaved());
+            callback(err, result);
+          }
+        });
 
-    return () => {
-      const {Meteor, Store} = context;
-      const dispatch = Store.dispatch;
-      dispatch(ReduxActions.createTicketSaving());
-      Meteor.call('ticket.create', key, (err, result) => {
-        console.log('ticket.create:', err, result);
-        if (err) {
-          dispatch(ReduxActions.createTicketError(err));
-        } else {
-          dispatch(ReduxActions.createTicket(result));
-          dispatch(ReduxActions.createTicketSaved());
-        }
-      });
     };
   },
   initCustomer({Meteor, dispatch}, cid){
@@ -29,6 +30,15 @@ export default {
       } else {
         dispatch(ReduxActions.initCustomer(result));
         dispatch(ReduxActions.initCustomerDone());
+      }
+    });
+  },
+  initSelectOptions({Meteor, dispatch}){
+    Meteor.call('ticket.select.init', (err, result) => {
+      console.log('ticket.select.init:', err, result);
+      if (err) {
+      } else {
+        dispatch(ReduxActions.initSelectOptions(result));
       }
     });
   },

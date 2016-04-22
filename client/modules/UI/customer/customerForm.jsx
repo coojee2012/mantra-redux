@@ -12,11 +12,16 @@ class CustomerForm extends React.Component {
     if(this.props.customerInfo && this.props.customerInfo.id != '' && this.props.customerInfo.id != preProps.customerInfo.id){
     this.props.initializeForm(this.props.customerInfo);
     }
- 
+    if(this.props.submitting != preProps.submitting){
+      Logger({msg:'customer UI submitting :'+this.submitting});
+    }
+
   }
   render() {
     Logger({msg: 'customer form UI :', props: this.props});
     const {
+      dynamicShowBtn,
+      dirty,
       submitting,
       resetForm,
       handleSubmit,
@@ -60,13 +65,13 @@ class CustomerForm extends React.Component {
             <input type="hidden" name="username" {...username}/>
           </div>
           {(()=> {
-            if (true) {
+            if (!dynamicShowBtn || (dynamicShowBtn && dirty)) {
               return <div className="form-group col-lg-12 col-md-12 col-xs-12 col-sm-12 text-right">
                 <button type="button" className="btn btn-default btn-sm" onClick={resetForm} disabled={submitting}>
                   取消
                 </button>
                 <button type="submit" style={{marginLeft:"15px"}} className="btn btn-primary btn-sm"
-                        onClick={this.clickSubmit.bind(this)}>保存
+                        onClick={this.clickSubmit.bind(this)} disabled={submitting}>保存
                 </button>
               </div>
             }
@@ -89,14 +94,15 @@ class CustomerForm extends React.Component {
   submit(values) {
     Logger("保存");
     const {saveCustomer,resetForm}=this.props;
-    saveCustomer(values)((err,data)=>{
+    return saveCustomer(values)((err,data)=>{
       if(err){
         Logger(err);
         Logger({msg:"showMsg", data:[{msgType: 0, msgContent: ObjTools.values(err).shift()}]});
+        return Promise.reject(err);
       }else{
         Logger({msg:"showMsg", data:[{msgType: 1, msgContent: "添加成功"}]});
         //resetForm();
-
+        return Promise.resolve();
       }
     });
   }
