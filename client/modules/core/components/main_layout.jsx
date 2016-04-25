@@ -7,10 +7,10 @@ const App = React.createClass({
     console.log('Main_Layout UI roomId:', this.props.coreReducer.roomId);
     const {history,location,setRoomId}=this.props;
     const openByPhone = (phone)=> {
-      history.replace('/search/' + phone+'?w=phone');
+      history.replace('/search/' + phone+'/yes?w=phone');
     }
     const openByChat = (visitorUserName)=> {
-      history.replace('/search/'+visitorUserName+'?w=chat');
+      history.replace('/search/'+visitorUserName+'/yes?w=chat');
     }
     const changeRoom = (roomId)=> {
       //如果将要打开的房间之前打开过

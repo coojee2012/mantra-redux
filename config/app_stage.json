@@ -1,0 +1,115 @@
+{
+  "apps": [
+    {
+      "name": "helpdesk-plugin",
+      "max_memory_restart": "1024M",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss SSS",
+      "script": "/srv/app/bundle/main.js",
+      "out_file": "/srv/app/app.log",
+      "error_file": "/srv/app/err.log",
+      "port": "80",
+      "env": {
+        "CDN_PREFIX": "//yunkefu.cc/helpdesk-plugin",
+        "MONGO_URL": "mongodb://helpdesk-plugin:helpdesk-plugin@172.31.0.21:28017,172.31.0.21:28018,172.31.0.21:28019/helpdesk-plugin",
+        "MONGO_OPLOG_URL": "mongodb://oplog-reader:oplog@172.31.0.21:28017,172.31.0.21:28018,172.31.0.21:28019/local?authSource=admin",
+        "ROOT_URL": "http://yunkefu.cc/helpdesk-plugin",
+        "MAIL_URL":"smtp://unicall:Qa21wzcwqe213asDC@3123wewe@172.31.48.11:587/",
+        "METEOR_SETTINGS": {
+          "public": {
+            "loggerLevel":"INFO",
+            "debug":false,
+            "autoLinker": {
+              "phone": false,
+              "urls": true,
+              "email": false
+            },
+            "helpdesk": {
+              "protocal": "https://",
+              "host": "math.yunkefu.cc",
+              "port": null,
+              "api": {
+                "suggestContacts": "/api/contacts/suggest",
+                "createContact": "/api/contacts",
+                "updateContact": "/api/contacts",
+                "getContactDetail": "/api/contacts",
+                "createTicket": "/api/tickets",
+                "getTicketConfig": "/api/tickets/ticketdomain",
+                "getAllAgentGroups": "/api/groups/findall",
+                "getAllAgent": "/api/agents",
+                "getAllAgentInGroup": "/api/groups"
+              }
+            }
+          },
+          "debug":false,
+          "loggerLevel":"INFO",
+          "autoLinker": {
+            "phone": false,
+            "urls": true,
+            "email": false
+          },
+          "oauth2": {
+            "service": "unicall",
+            "client_id": "yunkefu.cc",
+            "client_secret": "yunkefu.cc"
+          },
+          "ipseeker": {
+            "options": {
+              "host": "172.31.0.21",
+              "port": 10040,
+              "path": "/ip/location/seek",
+              "phoneArea":"/api/util/getLocationForPhoneNumber",
+              "method": "POST",
+              "headers": {
+                "accept": "*/*",
+                "content-type": "application/json",
+                "user-agent": "coffee rest client"
+              }
+            }
+          },
+          "channelManager": {
+            "messageAPI": {
+              "host": "172.31.0.21",
+              "port": 10020,
+              "satisfactionURL":"/api/survey/create",
+              "createURL": "/api/general/create",
+              "retrieveURL": "/api/general/retrieve"
+            }
+          },
+          "channelConfig": {
+            "baseUrl" : "http://172.31.0.21:10030",
+            "apiVersion":"/api/v0"
+          },
+          "NoReplyAddress":"no-reply@support.yunkefu.com",
+          "AWSAccessKeyId": "AKIAPSATLL73CQVBBZYA",
+          "AWSSecretAccessKey": "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",
+          "AWSRegion": "cn-north-1",
+          "AWSAttachBucket": "uobject",
+          "JWK":{
+            "alg": "HS256",
+            "kty": "oct",
+            "use": "sig",
+            "k": "859OnH-sSt-80TsIbEqmA1-N1HFwOynORww5n0gndJGbWv9RfdxNG6i-928UL28U5mwbhCzTVSP5S-BxCo_Yof23hiUe3l9Wi3wOSMe-9jHhVqKqg3TahrE_67UZYS1ME5f82qV-T4zxW-lO1N6m1WTEwNNw3oSkswdF7Wjo5moCJQ2iPn1ohcK1JUzpsD_pGy3XVHUeAghydJ-Lr2qA8kWiDPBd7yRl6bUGgzMKSmeCviDWq67XHX1CqaYwGjUHDJfLrLhd9qS1fr3jrFNxEqx3wYjd_-Emsjo-g9P00VCS9TiIuANqvzYmEXX9wK9hGp5C9Vm4ZVRSxagRhNYG2g",
+            "kid": "ff864fe2-0fa3-4c6d-9056-74fdd814f0c4"
+          },
+          "helpdesk": {
+            "protocal": "https://",
+            "host": "math.yunkefu.cc",
+            "port": null,
+            "api": {
+              "suggestContacts": "/api/contacts/suggest",
+              "createContact": "/api/contacts",
+              "updateContact": "/api/contacts",
+              "getContactDetail": "/api/contacts",
+              "createTicket": "/api/tickets",
+              "getTicketConfig": "/api/tickets/ticketdomain",
+              "getAllAgentGroups": "/api/groups/findall",
+              "getAllAgent": "/api/agents",
+              "getAllAgentInGroup": "/api/groups"
+            }
+          }
+        }
+      },
+      "PORT": "80"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "public": {
+    "loggerLevel":"DEBUG",
+    "debug":true,
+    "mockAgent": {
+      "appId": "aaf98f8950189e9b01504c331fb32106",
+      "subtoken": "cfd8df244d97b9de360370de06d38a2e",
+      "agentId": "1104",
+      "links": []
+    },
+    "helpdesk":{
+      "protocal":"https://",
+      "host":"math.yunkefu.cc",
+      "port":null,
+      "api":{
+        "suggestContacts":"/api/contacts/suggest",
+        "createContact":"/api/contacts",
+        "updateContact":"/api/contacts",
+        "getContactDetail":"/api/contacts",
+        "createTicket":"/api/tickets",
+        "getTicketConfig":"/api/tickets/ticketdomain",
+        "getAllAgentGroups":"/api/groups/findall",
+        "getAllAgent":"/api/agents",
+        "getAllAgentInGroup":"/api/groups"
+      },
+      "JWK":{
+        "alg": "HS256",
+        "kty": "oct",
+        "use": "sig",
+        "k": "859OnH-sSt-80TsIbEqmA1-N1HFwOynORww5n0gndJGbWv9RfdxNG6i-928UL28U5mwbhCzTVSP5S-BxCo_Yof23hiUe3l9Wi3wOSMe-9jHhVqKqg3TahrE_67UZYS1ME5f82qV-T4zxW-lO1N6m1WTEwNNw3oSkswdF7Wjo5moCJQ2iPn1ohcK1JUzpsD_pGy3XVHUeAghydJ-Lr2qA8kWiDPBd7yRl6bUGgzMKSmeCviDWq67XHX1CqaYwGjUHDJfLrLhd9qS1fr3jrFNxEqx3wYjd_-Emsjo-g9P00VCS9TiIuANqvzYmEXX9wK9hGp5C9Vm4ZVRSxagRhNYG2g",
+        "kid": "ff864fe2-0fa3-4c6d-9056-74fdd814f0c4"
+      },
+      "oauth2": {
+        "service": "unicall",
+        "client_id": "yunkefu.cc",
+        "client_secret": "yunkefu.cc"
+      }
+    }
+  },
+  "debug":true,
+  "loggerLevel":"DEBUG",
+  "channelManager": {
+    "messageAPI": {
+      "host": "192.168.2.220",
+      "port": 10020,
+      "satisfactionURL":"/api/survey/create",
+      "createURL": "/api/general/create",
+      "retrieveURL": "/api/general/retrieve"
+    }
+  },
+  "channelConfig": {
+    "baseUrl" : "http://192.168.2.220:10030",
+    "apiVersion":"/api/v0"
+  },
+  "NoReplyAddress":"no-reply@support.yunkefu.com",
+  "AWSAccessKeyId": "AKIAPSATLL73CQVBBZYA",
+  "AWSSecretAccessKey": "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",
+  "AWSRegion": "cn-north-1",
+  "AWSAttachBucket": "uobject",
+  "JWK":{
+    "alg": "HS256",
+    "kty": "oct",
+    "use": "sig",
+    "k": "859OnH-sSt-80TsIbEqmA1-N1HFwOynORww5n0gndJGbWv9RfdxNG6i-928UL28U5mwbhCzTVSP5S-BxCo_Yof23hiUe3l9Wi3wOSMe-9jHhVqKqg3TahrE_67UZYS1ME5f82qV-T4zxW-lO1N6m1WTEwNNw3oSkswdF7Wjo5moCJQ2iPn1ohcK1JUzpsD_pGy3XVHUeAghydJ-Lr2qA8kWiDPBd7yRl6bUGgzMKSmeCviDWq67XHX1CqaYwGjUHDJfLrLhd9qS1fr3jrFNxEqx3wYjd_-Emsjo-g9P00VCS9TiIuANqvzYmEXX9wK9hGp5C9Vm4ZVRSxagRhNYG2g",
+    "kid": "ff864fe2-0fa3-4c6d-9056-74fdd814f0c4"
+  },
+  "oauth2": {
+    "service": "unicall",
+    "client_id": "yunkefu.cc",
+    "client_secret": "yunkefu.cc"
+  },
+  "helpdesk":{
+    "protocal":"https://",
+    "host":"math.yunkefu.cc",
+    "port":null,
+    "api":{
+      "suggestContacts":"/api/contacts/suggest",
+      "createContact":"/api/contacts",
+      "updateContact":"/api/contacts",
+      "getContactDetail":"/api/contacts",
+      "createTicket":"/api/tickets",
+      "getTicketConfig":"/api/tickets/ticketdomain",
+      "getAllAgentGroups":"/api/groups/findall",
+      "getAllAgent":"/api/agents",
+      "getAllAgentInGroup":"/api/groups"
+    }
+  }
+}
+

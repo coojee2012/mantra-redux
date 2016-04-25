@@ -3,35 +3,58 @@
  */
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
+import {suggestContacts} from 'meteor/helpdesk'
+import {getContactDetail} from 'meteor/helpdesk';
+import {createContact} from 'meteor/helpdesk';
+import {updateContact} from 'meteor/helpdesk';
+import {WorkBenchContactMapper} from '../../lib/collections'
 
 export default function () {
   console.log('init customer method');
   Meteor.methods({
     'customer.search'(key) {
       check(key, String);
-      console.log('init customer method:', key);
+      Unicall.fn.logger.debug('Method -> customer.search key:', key);
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          const data = [{
-            id:new Date().getTime()+'',
-            name: 'test1',
-            contact: key + 'contact1'
-          }, {
-            id:new Date().getTime()+'',
-            name: 'test2',
-            contact: key + 'contact2'
+        try {
+          let tmp = suggestContacts(key);
+          //Unicall.fn.logger.debug('Method -> customer.search suggestContacts return :', tmp);
+          let datas = [];
+          for (let data of tmp) {
+            let contact = data.mobile ? data.mobile : data.telephone ? data.telephone : data.email ? data.email : "";
+            datas.push({
+              "id": data.id,
+              "name": data.name,
+              "contact": contact
+            });
           }
-          ];
-          resolve(data);
-        }, 3000);
+          /*return {
+           page:1,
+           totalPage:10,
+           list:datas
+           };*/
+          //Unicall.fn.logger.debug('Method -> customer.search datas:', datas);
+          resolve(datas);
+        } catch (ex) {
+          Unicall.fn.logger.error('Method -> customer.search error:', ex);
+          reject([]);
+        }
       });
     },
-    'customer.create'(data) {
+    'customer.create'(data, agentInfo, workbenchUsername) {
       check(data, Object);
-      console.log('create customer method:', data);
+      Unicall.fn.logger.debug('Method -> customer.create:', data, agentInfo, workbenchUsername);
       return new Promise((resolve, reject) => {
-        data.id="111111-111111";
-        resolve(data);
+        let res = createContact(data, agentInfo);
+        Unicall.fn.logger.debug('Method -> customer.create createContact result:', res);
+        WorkBenchContactMapper.insert({
+          username: workbenchUsername,
+          contactId: res.id,
+          name: res.name,
+          contactNumber: res.cellphone ? res.cellphone : res.phone,
+          createTime: new Date()
+        });
+        resolve(res);
       });
     }
   });

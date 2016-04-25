@@ -7,16 +7,30 @@ import ObjTools from 'lodash/fp/object';
 
 const CustomerInfoFields = ['id', 'name', 'username', 'email', 'mobile', 'address', 'telephone', 'memo'];
 class CustomerForm extends React.Component {
+  componentDidMount() {
+    if (this.props.autoWay === 'phone') {
+      if(/^[01|1][3|4|5|8][0-9]\d{4,8}$/.test(this.props.autoKey)){
+        this.refs.mobile.value = this.props.autoKey;
+      }else{
+        this.refs.telephone.value = this.props.autoKey;
+      }
+    }
+    else if(this.props.autoWay==='webchat'){
+      this.refs.username.value = this.props.autoKey;
+    }
+  }
+
   componentDidUpdate(preProps) {
     //初始化用户信息
-    if(this.props.customerInfo && this.props.customerInfo.id != '' && this.props.customerInfo.id != preProps.customerInfo.id){
-    this.props.initializeForm(this.props.customerInfo);
+    if (this.props.customerInfo && this.props.customerInfo.id != '' && this.props.customerInfo.id != preProps.customerInfo.id) {
+      this.props.initializeForm(this.props.customerInfo);
     }
-    if(this.props.submitting != preProps.submitting){
-      Logger({msg:'customer UI submitting :'+this.submitting});
+    if (this.props.submitting != preProps.submitting) {
+      Logger({msg: 'customer UI submitting :' + this.submitting});
     }
 
   }
+
   render() {
     Logger({msg: 'customer form UI :', props: this.props});
     const {
@@ -54,7 +68,7 @@ class CustomerForm extends React.Component {
           <div className="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
             <label htmlFor="telephone">电话</label>
             <input type="text" className="form-control" {...telephone}
-                   id="telephone" placeholder="电话" maxLength="32"/>
+                   ref="telephone" placeholder="电话" maxLength="32"/>
           </div>
           <div className="form-group col-lg-12 col-md-12 col-xs-12 col-sm-12">
             <label htmlFor="memo">备注</label>
@@ -62,7 +76,7 @@ class CustomerForm extends React.Component {
                         maxLength="500">
               </textarea>
             <input type="hidden" name="id" {...id}/>
-            <input type="hidden" name="username" {...username}/>
+            <input type="hidden" name="username" ref="username" {...username}/>
           </div>
           {(()=> {
             if (!dynamicShowBtn || (dynamicShowBtn && dirty)) {
@@ -93,14 +107,14 @@ class CustomerForm extends React.Component {
 
   submit(values) {
     Logger("保存");
-    const {saveCustomer,resetForm}=this.props;
-    return saveCustomer(values)((err,data)=>{
-      if(err){
+    const {saveCustomer, resetForm}=this.props;
+    return saveCustomer(values)((err, data)=> {
+      if (err) {
         Logger(err);
-        Logger({msg:"showMsg", data:[{msgType: 0, msgContent: ObjTools.values(err).shift()}]});
+        Logger({msg: "showMsg", data: [{msgType: 0, msgContent: ObjTools.values(err).shift()}]});
         return Promise.reject(err);
-      }else{
-        Logger({msg:"showMsg", data:[{msgType: 1, msgContent: "添加成功"}]});
+      } else {
+        Logger({msg: "showMsg", data: [{msgType: 1, msgContent: "添加成功"}]});
         //resetForm();
         return Promise.resolve();
       }

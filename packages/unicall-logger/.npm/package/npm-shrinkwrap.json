@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "log4js": {
+      "version": "0.6.29",
+      "dependencies": {
+        "async": {
+          "version": "0.2.10"
+        },
+        "readable-stream": {
+          "version": "1.0.34",
+          "dependencies": {
+            "core-util-is": {
+              "version": "1.0.2"
+            },
+            "isarray": {
+              "version": "0.0.1"
+            },
+            "string_decoder": {
+              "version": "0.10.31"
+            },
+            "inherits": {
+              "version": "2.0.1"
+            }
+          }
+        },
+        "semver": {
+          "version": "4.3.6"
+        },
+        "underscore": {
+          "version": "1.8.2"
+        }
+      }
+    }
+  }
+}

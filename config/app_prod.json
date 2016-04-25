@@ -1,0 +1,119 @@
+{
+  "apps": [
+    {
+      "name": "helpdesk-plugin",
+      "max_memory_restart": "1024M",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss SSS",
+      "script": "/srv/app/bundle/main.js",
+      "out_file": "/srv/app/app.log",
+      "error_file": "/srv/app/err.log",
+      "port": "80",
+      "env": {
+        "MONGO_URL": "mongodb://helpdesk-plugin:helpdesk-plugin@10.0.1.250:27017,10.0.1.181:27017,10.0.1.226:27017/helpdesk-plugin",
+        "MONGO_OPLOG_URL": "mongodb://oplog-reader:oplog@10.0.1.226:27017,10.0.1.250:27017,10.0.1.181:27017/local?authSource=admin",
+        "ROOT_URL": "http://yunkefu.com/helpdesk-plugin",
+        "MAIL_URL":"smtp://unicall:Qa21wzcwqe213asDC@3123wewe@10.0.1.10:587/",
+        "METEOR_SETTINGS": {
+          "public": {
+            "roomMaxQuietTime": 300,
+            "closing":"本次会话已结束，请为我的服务评价，谢谢！",
+            "welcomes":"欢迎使用在线云客服。",
+            "timeoutOffline": 15000,
+            "loggerLevel":"WARN",
+            "debug":false,
+            "autoLinker": {
+              "phone": false,
+              "urls": true,
+              "email": false
+            },
+            "helpdesk": {
+              "protocal": "https://",
+              "host": "math.yunkefu.cc",
+              "port": null,
+              "api": {
+                "suggestContacts": "/api/contacts/suggest",
+                "createContact": "/api/contacts",
+                "updateContact": "/api/contacts",
+                "getContactDetail": "/api/contacts",
+                "createTicket": "/api/tickets",
+                "getTicketConfig": "/api/tickets/ticketdomain",
+                "getAllAgentGroups": "/api/groups/findall",
+                "getAllAgent": "/api/agents",
+                "getAllAgentInGroup": "/api/groups"
+              }
+            }
+          },
+          "debug":false,
+          "loggerLevel":"WARN",
+          "roomMaxQuietTime": 300000,
+          "autoLinker": {
+            "phone": false,
+            "urls": true,
+            "email": false
+          },
+          "oauth2": {
+            "service": "unicall",
+            "client_id": "yunkefu.com",
+            "client_secret": "yunkefu.com"
+          },
+          "ipseeker": {
+            "options": {
+              "host": "internal-prod-elasticsearch-649472904.cn-north-1.elb.amazonaws.com.cn",
+              "port": 10040,
+              "path": "/ip/location/seek",
+              "phoneArea":"/api/util/getLocationForPhoneNumber",
+              "method": "POST",
+              "headers": {
+                "accept": "*/*",
+                "content-type": "application/json",
+                "user-agent": "coffee rest client"
+              }
+            }
+          },
+          "channelManager": {
+            "messageAPI": {
+              "host": "internal-prod-elasticsearch-649472904.cn-north-1.elb.amazonaws.com.cn",
+              "port": 10020,
+              "satisfactionURL":"/api/survey/create",
+              "createURL": "/api/general/create",
+              "retrieveURL": "/api/general/retrieve"
+            }
+          },
+          "channelConfig": {
+            "baseUrl" : "http://internal-prod-elasticsearch-649472904.cn-north-1.elb.amazonaws.com.cn:10030",
+            "apiVersion":"/api/v0"
+          },
+          "NoReplyAddress":"no-reply@support.yunkefu.com",
+          "AWSAccessKeyId": "AKIAODZ6AJ7IGXT326NA",
+          "AWSSecretAccessKey": "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",
+          "AWSRegion": "cn-north-1",
+          "AWSAttachBucket": "uobject",
+          "JWK":{
+            "alg": "HS256",
+            "k": "zECUrHzyvyB1LTIbX1IzmjjVSrXA0i5fzryk_hr7EYuIQwpk0RJ30PA5t0PWqbeG_Y7115jiXB3Kp6nGcYx7MvYyCVfuSHT1KI95FWut4itCsIcAdlZFzDPsjTYU8BLqYV-f8XfA4HGCr0HdTUHW74sBHQBnZZls1WtQ50HfBS-QrNtounbMQAI592WUg8J1pZALz8KUq1kDRPZmgA3jmPHJQONumEeBy926G5tdgZa4aU9TrekMMF_DSZUhvsZZXOEb09klaLE6otrb-oJtWrQ92BXBvYKfmOidVU5QmHNxue9jKpfkHgG6bXH46k94A5v0DHhbY33Q6anZXXCxRQ",
+            "kid": "ada0364c-4255-4118-9f46-8b4a1cd2baac",
+            "kty": "oct",
+            "use": "sig"
+          },
+          "helpdesk": {
+            "protocal": "https://",
+            "host": "math.yunkefu.cc",
+            "port": null,
+            "api": {
+              "suggestContacts": "/api/contacts/suggest",
+              "createContact": "/api/contacts",
+              "updateContact": "/api/contacts",
+              "getContactDetail": "/api/contacts",
+              "createTicket": "/api/tickets",
+              "getTicketConfig": "/api/tickets/ticketdomain",
+              "getAllAgentGroups": "/api/groups/findall",
+              "getAllAgent": "/api/agents",
+              "getAllAgentInGroup": "/api/groups"
+            }
+          }
+        }
+      },
+      "PORT": "80"
+    }
+  ]
+}

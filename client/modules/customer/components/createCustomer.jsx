@@ -28,13 +28,14 @@ class CreateCustomer extends React.Component {
     Logger({msg: 'create customer UI :', props: this.props});
     const {SearchBar, Customer:{CustomerForm, FlipBar}}=UI;
     const {
-      customerInfo,
       searchKey,
       searchCustomers,
       addCustomer,
       location,
       history
     } = this.props;
+    const autoWay =  this.props.location.query.w || '';
+    const autoKey = this.props.location.query.key || '';
     return (
       <Row>
         <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group">
@@ -52,6 +53,8 @@ class CreateCustomer extends React.Component {
           </Col>
           <Col >
             <CustomerForm
+              autoWay={autoWay}
+              autoKey={autoKey}
               dynamicShowBtn={false}
               saveCustomer={addCustomer}
             />

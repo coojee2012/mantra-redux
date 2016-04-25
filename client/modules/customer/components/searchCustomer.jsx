@@ -6,7 +6,7 @@ class SearchCustomer extends React.Component {
     //TODO 加载历史
     Logger({msg: 'customer search UI componentWillMount :', props: this.props});
 
-    
+
   }
   componentDidUpdate(preProps) {
     const {visibleLists,history,autoSearchStatus} = this.props;
@@ -14,7 +14,8 @@ class SearchCustomer extends React.Component {
       Logger("自动搜索=====");
       if(visibleLists.length === 0){
         Logger({msg: "自动搜索没有发现联系人!!"});
-        history.replace('/customer/create');
+        let search = this.props.location.search+'&key='+this.props.params.key;
+        history.replace('/customer/create'+search);
       }
       else if(visibleLists.length === 1){
         Logger({msg: "自动搜索发现只有一个联系人!!"});

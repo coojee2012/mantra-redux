@@ -22,3 +22,13 @@ check
 random
 standard-minifier-css
 standard-minifier-js
+
+
+unicall:lib
+unicall:logger
+twbs:bootstrap
+helpdesk
+unicall:unicall-token-login
+unicall:unicall-oauth-mock
+unicall:unicall-oauth
+meteorhacks:inject-initial

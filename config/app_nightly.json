@@ -1,0 +1,94 @@
+{
+  "apps": [
+    {
+      "name": "helpdesk-plugi",
+      "max_memory_restart": "1024M",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss SSS",
+      "script": "/srv/app/bundle/main.js",
+      "out_file": "/srv/app/app.log",
+      "error_file": "/srv/app/err.log",
+      "port": "80",
+      "env": {
+        "MONGO_URL": "mongodb://helpdesk-plugin:helpdesk-plugin@10.0.4.10:28017,10.0.4.10:28018,10.0.4.10:28019/helpdesk-plugin",
+        "MONGO_OPLOG_URL": "mongodb://oplog-reader:oplog@10.0.4.10:28017,10.0.4.10:28018,10.0.4.10:28019/local?authSource=admin",
+        "ROOT_URL": "http://quickdesk.cn/helpdesk-plugin",
+        "MAIL_URL": "smtp://unicall:Qa21wzcwqe213asDC@3123wewe@10.0.4.10:587/",
+        "METEOR_DOWN_KEY": "6zjAAhtNQM33XnQYLGZmS9bWdwfG7crC",
+        "METEOR_SETTINGS": {
+          "public": {
+            "loggerLevel": "DEBUG",
+            "debug": false,
+            "autoLinker": {
+              "phone": false,
+              "urls": true,
+              "email": false
+            },
+            "mockAgent": {
+              "appId": "aaf98f8950189e9b01504c331fb32106",
+              "subtoken": "cfd8df244d97b9de360370de06d38a2e",
+              "agentId": "1104",
+              "links": []
+            },
+            "helpdesk": {
+              "protocal": "https://",
+              "host": "math.yunkefu.cc",
+              "port": null,
+              "api": {
+                "suggestContacts": "/api/contacts/suggest",
+                "createContact": "/api/contacts",
+                "updateContact": "/api/contacts",
+                "getContactDetail": "/api/contacts",
+                "createTicket": "/api/tickets",
+                "getTicketConfig": "/api/tickets/ticketdomain",
+                "getAllAgentGroups": "/api/groups/findall",
+                "getAllAgent": "/api/agents",
+                "getAllAgentInGroup": "/api/groups"
+              }
+            }
+          },
+          "debug": false,
+          "loggerLevel": "DEBUG",
+          "channelConfig": {
+            "baseUrl": "http://10.0.4.10:10030",
+            "apiVersion": "/api/v0"
+          },
+          "NoReplyAddress": "no-reply@support.yunkefu.com",
+          "AWSAccessKeyId": "AKIAPSATLL73CQVBBZYA",
+          "AWSSecretAccessKey": "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",
+          "AWSRegion": "cn-north-1",
+          "AWSAttachBucket": "uobject",
+          "oauth2": {
+            "service": "unicall",
+            "client_id": "quickdesk.cn",
+            "client_secret": "quickdesk.cn"
+          },
+          "JWK": {
+            "alg": "HS256",
+            "kty": "oct",
+            "use": "sig",
+            "k": "lBDYNJW3q8hfCqXvRBJSurUA5CUwP5aNGYqnUnALyCzwEXOUXQTIcHi_cNmjwzeXhJ5ShAQiqjbzhuZWku3SkcLkc22iC15PsfNybTISqQut5ds8mRYRe-MpwKi-reVyn-1i5YCdWrKPMEpo_4yBOPk3_Mo7EyYRDV8GSXucrreE5BnaZJdlAHU2ispZMrch0zm3lwoLAox2YlLp4NrCYziVC_UYSwHeW96UcO6HUefaDFCTyIycw02aXSrq05TyR21-ky5-cLhlj1mmtn-tQi6kHb5NRYJLSmyiRrARVhyT-rJE0Fnne0vr-g9PshjJhMsMtlOW41zVh5vEVc_XRA",
+            "kid": "43662435-efa3-4ce2-87d7-d08992232a62"
+          },
+          "helpdesk": {
+            "protocal": "http://",
+            "host": "math.yunkefu.cc",
+            "port": null,
+            "api": {
+              "suggestContacts": "/api/contacts/suggest",
+              "createContact": "/api/contacts",
+              "updateContact": "/api/contacts",
+              "getContactDetail": "/api/contacts",
+              "createTicket": "/api/tickets",
+              "getTicketConfig": "/api/tickets/ticketdomain",
+              "getAllAgentGroups": "/api/groups/findall",
+              "getAllAgent": "/api/agents",
+              "getAllAgentInGroup": "/api/groups"
+            }
+          }
+        },
+        "PORT": "80"
+      }
+    }
+  ]
+}
+

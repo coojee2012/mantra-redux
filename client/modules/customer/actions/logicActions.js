@@ -2,6 +2,7 @@
  * Created by LinYong on 2016/3/22.
  */
 import customerReduxActions from './reduxActions';
+import {createContact}   from 'meteor/helpdesk';
 export default {
   search({Meteor, dispatch}, key) {
     return () => {
@@ -37,10 +38,10 @@ export default {
       });
     };
   },
-  addCustomer({Meteor, dispatch}, data) {
+  addCustomer({Meteor, dispatch}, data,username) {
     return (callback) => {
       dispatch(customerReduxActions.createCustomerSaving());
-      Meteor.call('customer.create', data, (err, result) => {
+     /* Meteor.call('customer.create', data, (err, result) => {
         if (err) {
           dispatch(customerReduxActions.saveCustomerError());
         } else {
@@ -49,7 +50,18 @@ export default {
 
         }
         callback(err, result);
+      });*/
+      
+      createContact(data, username, (e, r)=> {
+        if (e) {
+          dispatch(customerReduxActions.saveCustomerError());
+        } else {
+          dispatch(customerReduxActions.createCustomerNew(result));
+          dispatch(customerReduxActions.createCustomerSaved());
+        }
+        callback(e, r);
       });
+      
     };
   }
 };
