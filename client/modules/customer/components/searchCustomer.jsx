@@ -9,7 +9,7 @@ class SearchCustomer extends React.Component {
 
   }
   componentDidUpdate(preProps) {
-    const {visibleLists,history,autoSearchStatus} = this.props;
+    const {visibleLists,history,autoSearchStatus,searchKey} = this.props;
     if (this.props.params.auto === 'yes' && autoSearchStatus === 1) {
       Logger("自动搜索=====");
       if(visibleLists.length === 0){
@@ -19,7 +19,7 @@ class SearchCustomer extends React.Component {
       }
       else if(visibleLists.length === 1){
         Logger({msg: "自动搜索发现只有一个联系人!!"});
-        history.replace('/ticket/' + this.props.visibleLists[0].id);
+        history.replace('/ticket/' + this.props.visibleLists[0].id+'?searchKey='+searchKey);
       }
     }
   }
@@ -46,7 +46,7 @@ class SearchCustomer extends React.Component {
           { searchKey != '' ? (
             <div>
               <CreateBtnPanle {...this.props} />
-              <CustomerListTable customers={visibleLists} auto={this.props.params.auto || 'no'}/>
+              <CustomerListTable customers={visibleLists} auto={this.props.params.auto || 'no' } selectedRow={this.selectRow.bind(this)}/>
             </div>) :
             (<div><Loading></Loading></div>)}
         </div>
@@ -59,6 +59,11 @@ class SearchCustomer extends React.Component {
     //history.replaceState(null, '/ticket/11');
     history.replace('/ticket/11')
     //this.props.gotoBackCustomer(this.props.customerKey);
+  }
+
+  selectRow(id){
+    const {history,searchKey} = this.props;
+    history.replace('/ticket/'+id+'?searchKey='+searchKey);
   }
 
 }

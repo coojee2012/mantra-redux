@@ -3,6 +3,7 @@
  */
 
 export const TICKET_INFO='TICKET_INFO';
+export const TICKET_INIT='TICKET_INIT';
 export const TICKET_CREATE='TICKET_CREATE';
 export const TICKET_CREATE_ERROR='TICKET_CREATE_ERROR';
 export const TICKET_SAVING='TICKET_SAVING';

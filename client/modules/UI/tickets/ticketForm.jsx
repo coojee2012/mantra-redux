@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Grid, Row, Col, Button} from 'react-bootstrap';
 import {reduxForm} from 'redux-form';
+import autosize from 'autosize';
 
 import TicketsSelect from './ticketsSelect.jsx';
 import {Logger} from '../../tools';
@@ -16,11 +17,11 @@ class TicketFrom extends Component {
 
   componentDidMount() {
     //自适应description
-    /*  try{
-     autosize(this.refs.description);
-     }catch (e){
-     console.log('avoid autosize error')
-     }*/
+    try {
+      autosize(this.refs.description);
+    } catch (e) {
+      Logger('avoid autosize error:',e);
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {

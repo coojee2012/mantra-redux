@@ -10,7 +10,6 @@ import {updateContact} from 'meteor/helpdesk';
 import {WorkBenchContactMapper} from '../../lib/collections'
 
 export default function () {
-  console.log('init customer method');
   Meteor.methods({
     'customer.search'(key) {
       check(key, String);
@@ -59,6 +58,32 @@ export default function () {
           resolve(res);
         }catch(ex){
           Unicall.fn.logger.error('Method -> customer.create error:', ex);
+          reject(ex);
+        }
+      });
+    },
+    'customer.detail'(id){
+      Unicall.fn.logger.debug('Method -> [customer.detail] :', id);
+      check(id, String);
+      return new Promise((resolve, reject) => {
+        try{
+          let res = getContactDetail(id);
+          resolve(res);
+        }catch(ex){
+          Unicall.fn.logger.error('Method -> [customer.detail] Error:', ex);
+          reject(ex);
+        }
+      });
+
+    },
+    'customer.update'(contactObj, agentInfo){
+      check(contactObj, Object);
+      return new Promise((resolve, reject) => {
+        try{
+          let res = updateContact(contactObj, agentInfo);
+          resolve(res);
+        }catch(ex){
+          Unicall.fn.logger.error('Method -> [customer.detail] Error:', ex);
           reject(ex);
         }
       });

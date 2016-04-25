@@ -1,29 +1,29 @@
 //@puw
 import React, {Component, PropTypes} from 'react';
 import {Grid, Row, Col, Button} from 'react-bootstrap';
-
+import {TicketInfo} from '../configs/const';
 import UI from '../../UI'
 import {Logger} from '../../tools';
-
 
 
 class CreateTickets extends Component {
   componentWillMount() {
     //初始化值
-    if(this.props.params.cid){
+    if (this.props.params.cid) {
       this.props.LogicActions.initCustomer(this.props.params.cid);
+      this.props.LogicActions.initSelectOptions()((err, result)=> {
+        this.initTicket(result);
+      });
+
+    } else {
+      //TODO linyong 如果不存在,业务逻辑是不允许的
     }
-    this.props.LogicActions.initSelectOptions();
+
     //this.props.initializeForm(this.props.createReducer.create);
   }
 
   componentDidMount() {
-    //自适应description
-    /*  try{
-     autosize(this.refs.description);
-     }catch (e){
-     console.log('avoid autosize error')
-     }*/
+
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -36,43 +36,30 @@ class CreateTickets extends Component {
 
 
   render() {
-    console.log('ticket UI:', this.props);
+    Logger({msg: 'ticket UI:', props: this.props});
     propTypes = {
       fields: PropTypes.object.isRequired,
       handleSubmit: PropTypes.func.isRequired,
       resetForm: PropTypes.func.isRequired,
       submitting: PropTypes.bool.isRequired
     };
-    const h3Style = {
-      paddingTop: "20px",
-      borderBottom: "1px #CEC6C6 solid",
-      paddingBottom: "10px"
-    };
     const {
       //fields: {subject, type, ticketState, priority, groups, agents, description, contactId},
-      LogicActions:{createTicket,editCustomer},
-      createReducer:{customerInfo,editCustomerStatus,selectOptions},
-      searchKey,
-      searchCustomers,
-      location,
+      LogicActions:{createTicket, editCustomer},
+      createReducer:{customerInfo, editCustomerStatus, selectOptions},
+      location:{query:{searchKey}},
       history
     } = this.props;
 
-    const {SearchBar, Customer:{CustomerForm}, Tickets:{TicketForm, FlipBar}}=UI;
+    const {Customer:{CustomerForm}, Tickets:{TicketForm, FlipBar}}=UI;
     return (
       <Row>
         <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group">
           <Col>
-            <SearchBar searchKey={searchKey}
-                       mountAndSearch={false}
-                       placeHolder='手机/电子邮件/姓名'
-                       search={searchCustomers}
-                       location={location}
-                       history={history}
+            <FlipBar
+              searchKey={searchKey}
+              history={history}
             />
-          </Col>
-          <Col>
-            <FlipBar></FlipBar>
           </Col>
           <Col >
             <CustomerForm
@@ -92,6 +79,21 @@ class CreateTickets extends Component {
       </Row>
     );
   };
+
+  initTicket(selectOptions) {
+    let ticket = TicketInfo;
+    const {
+      LogicActions:{initTicket},
+      params:{cid},
+    } = this.props;
+    ticket.contactId = cid;
+    ticket.type = selectOptions.type[0].value;
+    ticket.ticketState = 'Opened';
+    ticket.priority = 20;
+    ticket.groups = '--';
+    ticket.agents = localStorage.getItem('agentinfo');
+    initTicket(ticket);
+  }
 }
 
 

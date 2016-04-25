@@ -4,17 +4,160 @@
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
+import {getTicketConfig} from 'meteor/helpdesk'
+import {getTicketDomain} from 'meteor/helpdesk'
+import {createTicket} from 'meteor/helpdesk';
+import {getAllAgentGroups} from 'meteor/helpdesk';
+import {getAllAgent} from 'meteor/helpdesk';
+import {getAllAgentInGroup} from 'meteor/helpdesk';
+
+
+let tenantId = 'this';
+let priorityDict = {}
+priorityDict[20] = "低";
+priorityDict[40] = "中";
+priorityDict[60] = "高";
+priorityDict[80] = "紧急";
+priorityDict[100] = "非常紧急";
+priorityDict[-99999] = "默认";
+let stateDict = {}
+stateDict["Opened"] = "处理中";
+stateDict["Pending"] = "等待回复";
+stateDict["Resolved"] = "已解决";
+stateDict["Closed"] = "已关闭";
+stateDict["-99999"] = "默认";
+let getPriorityDisplay = function (key) {
+  if (priorityDict[key]) {
+    return priorityDict[key];
+  } else {
+    return priorityDict[-99999];
+  }
+}
+let getStateDisplay = function (key) {
+  if (stateDict[key]) {
+    return stateDict[key];
+  } else {
+    return stateDict[-99999];
+  }
+}
+
 export default function () {
-  console.log('init tickets method');
+  Unicall.fn.logger.debug('init tickets method');
   Meteor.methods({
-    'ticket.create'(data) {
-      check(data, Object);
-      console.log('In tickets method ticket.create:', data);
+
+    'ticket.configs'(agentInfo){
+      let ticketDomain = getTicketConfig(agentInfo);
+      let groups = getAllAgentGroups(agentInfo);
+      let allAgent = getAllAgent(agentInfo);
+      let agentData = [];
+      let groupData = [];
+      let ticketStates = [];
+      let priorities = [];
+      let types = [];
+      for (let agent of allAgent) {
+        let tmp = {
+          key: agent.name,
+          value: agent.username
+        }
+        agentData.push(tmp);
+      }
+      for (let group of groups) {
+        let tmp = {
+          key: group.name,
+          value: group.id
+        }
+        groupData.push(tmp);
+      }
+      groupData.unshift({key: '--', value: ''});
+      for (var ticketState of ticketDomain.ticketState) {
+        var tmp = {
+          key: getStateDisplay(ticketState.agentDisplay),
+          value: ticketState.agentDisplay
+        }
+        ticketStates.push(tmp);
+      }
+      for (let priority of ticketDomain.priority) {
+        let tmp = {
+          key: getPriorityDisplay(priority),
+          value: priority,
+        }
+        priorities.push(tmp);
+      }
+      priorities.pop();//去掉优先级100
+      for (let type of ticketDomain.type) {
+        let tmp = {
+          key: type,
+          value: type
+        }
+        types.push(tmp);
+      }
+      return {
+        ticketState: ticketStates,
+        priority: priorities,
+        type: types,
+        agents: agentData,
+        groups: groupData,
+      };
+    },
+    'ticket.create'(ticketObj, agentInfo){
+
+      check(ticketObj, Object);
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          data.id = new Date().getTime() + ''
-          resolve(data);
-        }, 1000);
+        try {
+          let res = createTicket(ticketObj, agentInfo);
+          resolve(res);
+        } catch (ex) {
+          Unicall.fn.logger.error('Method -> [ticket.create] Error:', ex);
+          reject(ex);
+        }
+      });
+
+    },
+    'ticket.domain'(){
+      return new Promise((resolve, reject) => {
+        try {
+          let res = getTicketDomain();
+          resolve(res);
+        } catch (ex) {
+          Unicall.fn.logger.error('Method -> [ticket.domain] Error:', ex);
+          reject(ex);
+        }
+      });
+
+    },
+    'ticket.getAllAgentGroups'(){
+      return new Promise((resolve, reject) => {
+        try {
+          let res = getAllAgentGroups();
+          resolve(res);
+        } catch (ex) {
+          Unicall.fn.logger.error('Method -> [ticket.getAllAgentGroups] Error:', ex);
+          reject(ex);
+        }
+      });
+    },
+    'ticket.getAllAgent'(){
+      return new Promise((resolve, reject) => {
+        try {
+          let res = getAllAgent();
+          resolve(res);
+        } catch (ex) {
+          Unicall.fn.logger.error('Method -> [ticket.getAllAgent] Error:', ex);
+          reject(ex);
+        }
+      });
+
+    },
+    'ticket.getAllAgentInGroup'(groupId){
+      check(groupId, String);
+      return new Promise((resolve, reject) => {
+        try {
+          let res = getAllAgentInGroup();
+          resolve(res);
+        } catch (ex) {
+          Unicall.fn.logger.error('Method -> [ticket.getAllAgentInGroup] Error:', ex);
+          reject(ex);
+        }
       });
     },
     'ticket.customer.init'(cid) {

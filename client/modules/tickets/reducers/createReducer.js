@@ -8,6 +8,7 @@ import {
   TICKET_SAVE_DONE,
   TICKET_SAVE_RESET,
   TICKET_INFO,
+  TICKET_INIT,
   TICKET_CREATE_ERROR,
   TICKET_INIT_SELECT_OPTIONS
 } from '../actions/actionTypes.js';
@@ -27,13 +28,15 @@ import {TicketInfo, CustomerInfo} from '../configs/const';
 function ticketInfo(state = TicketInfo, action) {
   switch (action.type) {
     case TICKET_INFO:
-      return Object.assign({}, state, action.old);
+      return Object.assign({}, state, action.data);
+    case TICKET_INIT:
+      return Object.assign({}, state, action.data);
     default:
       return state;
   }
 }
 
-function selectOptions(state={},action) {
+function selectOptions(state = {}, action) {
   switch (action.type) {
     case TICKET_INIT_SELECT_OPTIONS:
       return Object.assign({}, state, action.data);

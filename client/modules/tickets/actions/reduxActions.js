@@ -1,6 +1,7 @@
 import {
   TICKET_CREATE,
   TICKET_INFO,
+  TICKET_INIT,
   TICKET_SAVING,
   TICKET_SAVE_DONE,
   TICKET_CREATE_ERROR,
@@ -56,6 +57,9 @@ export default {
   },
   editCustomerStatusReset(){
     return {type: TICKET_EDIT_CUSTOMER_RESET};
+  },
+  initTicket(data){
+    return {type: TICKET_INIT,data};
   },
   initSelectOptions(data){
     return {type: TICKET_INIT_SELECT_OPTIONS,data};

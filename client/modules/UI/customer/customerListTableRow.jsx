@@ -12,13 +12,11 @@ class CustomerListTableRow extends React.Component {
       </tr>
     );
   }
-
-  selectRecord(id) {
-    //return this.props.goCustomerDetail(id);
-  }
+  
 
   action(e) {
-    //this.selectRecord(record.id);
+    const {selectedRow,customer:{id}}=this.props
+    selectedRow(id);
   }
 
   mouseOver(e) {

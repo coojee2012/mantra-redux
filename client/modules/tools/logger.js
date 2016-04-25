@@ -1,9 +1,9 @@
 /**
  * Created by linyong on 16/4/14.
  */
-const Logger = (msg)=> {
+const Logger = (...args)=> {
   if (window && window.console) {
-    window.console.log(msg);
+    window.console.log(...args);
   } else {
 
   }
