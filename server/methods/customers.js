@@ -42,19 +42,25 @@ export default function () {
       });
     },
     'customer.create'(data, agentInfo, workbenchUsername) {
-      check(data, Object);
       Unicall.fn.logger.debug('Method -> customer.create:', data, agentInfo, workbenchUsername);
+      check(data, Object);
+
       return new Promise((resolve, reject) => {
-        let res = createContact(data, agentInfo);
-        Unicall.fn.logger.debug('Method -> customer.create createContact result:', res);
-        WorkBenchContactMapper.insert({
-          username: workbenchUsername,
-          contactId: res.id,
-          name: res.name,
-          contactNumber: res.cellphone ? res.cellphone : res.phone,
-          createTime: new Date()
-        });
-        resolve(res);
+        try {
+          let res = createContact(data, agentInfo);
+          Unicall.fn.logger.debug('Method -> customer.create createContact result:', res);
+          WorkBenchContactMapper.insert({
+            username: workbenchUsername,
+            contactId: res.id,
+            name: res.name,
+            contactNumber: res.cellphone ? res.cellphone : res.phone,
+            createTime: new Date()
+          });
+          resolve(res);
+        }catch(ex){
+          Unicall.fn.logger.error('Method -> customer.create error:', ex);
+          reject(ex);
+        }
       });
     }
   });

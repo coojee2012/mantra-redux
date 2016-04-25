@@ -9,13 +9,13 @@ const CustomerInfoFields = ['id', 'name', 'username', 'email', 'mobile', 'addres
 class CustomerForm extends React.Component {
   componentDidMount() {
     if (this.props.autoWay === 'phone') {
-      if(/^[01|1][3|4|5|8][0-9]\d{4,8}$/.test(this.props.autoKey)){
+      if (/^[01|1][3|4|5|8][0-9]\d{4,8}$/.test(this.props.autoKey)) {
         this.refs.mobile.value = this.props.autoKey;
-      }else{
+      } else {
         this.refs.telephone.value = this.props.autoKey;
       }
     }
-    else if(this.props.autoWay==='webchat'){
+    else if (this.props.autoWay === 'webchat') {
       this.refs.username.value = this.props.autoKey;
     }
   }
@@ -26,7 +26,7 @@ class CustomerForm extends React.Component {
       this.props.initializeForm(this.props.customerInfo);
     }
     if (this.props.submitting != preProps.submitting) {
-      Logger({msg: 'customer UI submitting :' + this.submitting});
+      Logger({msg: 'customer UI submitting :' + this.props.submitting});
     }
 
   }
@@ -106,25 +106,26 @@ class CustomerForm extends React.Component {
   }
 
   submit(values) {
-    Logger("保存");
+    Logger('保存客户信息!');
     const {saveCustomer, resetForm}=this.props;
-    return saveCustomer(values)((err, data)=> {
-      if (err) {
-        Logger(err);
-        Logger({msg: "showMsg", data: [{msgType: 0, msgContent: ObjTools.values(err).shift()}]});
-        return Promise.reject(err);
-      } else {
-        Logger({msg: "showMsg", data: [{msgType: 1, msgContent: "添加成功"}]});
-        //resetForm();
-        return Promise.resolve();
-      }
+    return new Promise((resolve, reject)=> {
+      saveCustomer(values)((err, data)=> {
+        if (err) {
+          Logger({msg: 'Save Customer Error:', error: err});
+          reject(err);
+        } else {
+          Logger({msg: "Save Customer Success:", data: "添加成功"});
+          //resetForm();
+          resolve(data);
+        }
+      });
     });
   }
 
   clickSubmit() {
     if (this.props.invalid) {
       const error = ObjTools.values(this.props.errors).shift();
-      Logger(error);
+      Logger({msg: 'Submit Check Customer Error:', error: error});
     }
   }
 

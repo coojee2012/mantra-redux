@@ -17,7 +17,7 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 #kadira:flow-router
 reactive-dict
-audit-argument-checks
+#audit-argument-checks
 check
 random
 standard-minifier-css
@@ -32,3 +32,4 @@ unicall:unicall-token-login
 unicall:unicall-oauth-mock
 unicall:unicall-oauth
 meteorhacks:inject-initial
+mizzao:partitioner

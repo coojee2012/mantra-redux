@@ -16,7 +16,7 @@ class CreateCustomer extends React.Component {
     resetSaveStatus();
   }
   componentDidUpdate(preProps) {
-    if (this.props.createReducer.saveStatus === 1) {
+    if (this.props.createReducer.saveStatus === 2) {
       const {history, resetSaveStatus, createReducer:{customerInfo}} = this.props;
       Logger({msg: "保存用户信息成功!", props: this.props.createReducer, customerInfo: customerInfo});
       resetSaveStatus();
@@ -26,8 +26,9 @@ class CreateCustomer extends React.Component {
 
   render() {
     Logger({msg: 'create customer UI :', props: this.props});
-    const {SearchBar, Customer:{CustomerForm, FlipBar}}=UI;
+    const {SearchBar, Customer:{CustomerForm, FlipBar},ToolTip}=UI;
     const {
+      createReducer:{saveStatus},
       searchKey,
       searchCustomers,
       addCustomer,
@@ -36,6 +37,16 @@ class CreateCustomer extends React.Component {
     } = this.props;
     const autoWay =  this.props.location.query.w || '';
     const autoKey = this.props.location.query.key || '';
+    let msgType = -1;
+    let msgContent='';
+    if(saveStatus == 2){
+      msgType = 1;
+      msgContent='保存成功!';
+    }
+    if(saveStatus == -1){
+      msgType = 0;
+      msgContent='保存失败!';
+    }
     return (
       <Row>
         <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group">
@@ -59,6 +70,12 @@ class CreateCustomer extends React.Component {
               saveCustomer={addCustomer}
             />
 
+          </Col>
+          <Col>
+            <ToolTip
+              msgType={msgType}
+              msgContent={msgContent}
+            />
           </Col>
         </div>
       </Row>
