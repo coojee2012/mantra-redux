@@ -23,9 +23,10 @@ class FlipBar extends React.Component {
   }
 
   gotoContact() {
-    const {history, searchKey} = this.props;
+    const {history, searchKey, contactId} = this.props;
     let url = '/search';
-    url += searchKey ? '/' + searchKey : '';
+    url += searchKey ? '/' + encodeURI(searchKey) : '';
+    url += '?cid=' + encodeURI(contactId);
     history.replace(url);
   }
 }

@@ -22,11 +22,20 @@ class CustomerForm extends React.Component {
 
   componentDidUpdate(preProps) {
     //初始化用户信息
-    if (this.props.customerInfo && this.props.customerInfo.id != '' && this.props.customerInfo.id != preProps.customerInfo.id) {
+    if (this.props.customerInfo && this.props.customerInfo.id != '' && this.props.customerInfo.id != this.props.values.id) {
       this.props.initializeForm(this.props.customerInfo);
     }
     if (this.props.submitting != preProps.submitting) {
       Logger({msg: 'customer UI submitting :' + this.props.submitting});
+    }
+
+  }
+
+  componentWillUnmount(){
+    Logger({msg: 'Customer Form componentWillUnmount!', props: this.props});
+    const {storeCustomer,values,dirty} = this.props;
+    if(dirty && typeof storeCustomer == 'function'){
+      storeCustomer(values);
     }
 
   }

@@ -10,26 +10,48 @@ import ObjTools from 'lodash/fp/object';
 
 
 class TicketFrom extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   componentWillMount() {
-    //初始化值
-    //this.props.initializeForm(this.props.createReducer.create);
+    Logger({msg: 'Ticket Form componentWillMount!', props: this.props});
   }
 
   componentDidMount() {
+    Logger({msg: 'Ticket Form componentDidMount!', props: this.props});
     //自适应description
     try {
       autosize(this.refs.description);
     } catch (e) {
-      Logger('avoid autosize error:',e);
+      Logger('avoid autosize error:', e);
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    //console.log('====',nextProps,  nextState);
+  componentWillUpdate(nextProps) {
+    Logger({msg: 'Ticket Form componentWillUpdate!', props: this.props});
     //初始化值 初次加载或路由变更后 @TODO 临时解决路由更新后表单不更新,待寻找更优的方式.
     //if(this.props.values.contactId != this.props.defaultValues.contactId){
     //this.props.initializeForm(this.props.createReducer.create);
     // }
+
+  }
+
+  componentDidUpdate(nextProps) {
+    Logger({msg: 'Ticket Form componentDidUpdate!', props: this.props});
+    //初始化值 初次加载或路由变更后 @TODO 临时解决路由更新后表单不更新,待寻找更优的方式.
+    if (this.props.ticketInfo && this.props.ticketInfo.contactId != '' && this.props.ticketInfo.contactId != this.props.values.contactId) {
+      Logger({msg: 'Ticket Form 重新初始化数据!'});
+      this.props.initializeForm(this.props.ticketInfo);
+    }
+  }
+
+  componentWillUnmount() {
+    Logger({msg: 'Ticket Form componentWillUnmount!', props: this.props});
+    const {storeTicket, values, dirty} = this.props;
+    if (dirty && typeof storeTicket == 'function') {
+      storeTicket(values);
+    }
   }
 
   submit(values) {
@@ -47,7 +69,7 @@ class TicketFrom extends Component {
             resolve(resulet);
           }
         });
-      }catch(ex){
+      } catch (ex) {
         Logger({msg: "error", data: ex});
         reject(ex);
       }
@@ -67,12 +89,7 @@ class TicketFrom extends Component {
 
   render() {
     console.log('Ticket Form UI:', this.props);
-    propTypes = {
-      fields: PropTypes.object.isRequired,
-      handleSubmit: PropTypes.func.isRequired,
-      resetForm: PropTypes.func.isRequired,
-      submitting: PropTypes.bool.isRequired
-    };
+
     const h3Style = {
       paddingTop: "20px",
       borderBottom: "1px #CEC6C6 solid",
@@ -117,7 +134,8 @@ class TicketFrom extends Component {
         <Row>
           <Col xs={12} sm={6} className={'form-group ' + (groups.error && groups.touched ? 'has-error' : '')}>
             <label>组</label>
-            <TicketsSelect name="groups" {...groups} options={selectOptions['groups']} onChange={this.changeGroup.bind(this)} />
+            <TicketsSelect name="groups" {...groups} options={selectOptions['groups']}
+                           onChange={this.changeGroup.bind(this)}/>
           </Col>
           <Col xs={12} sm={6} className={'form-group ' + (agents.error && agents.touched ? 'has-error' : '')}>
             <label>客服</label>
@@ -146,6 +164,12 @@ class TicketFrom extends Component {
   };
 }
 
+TicketFrom.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  resetForm: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
+};
 //验证字段
 const validate = values => {
   const errors = {};

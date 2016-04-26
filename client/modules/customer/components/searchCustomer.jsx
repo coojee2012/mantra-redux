@@ -8,33 +8,39 @@ class SearchCustomer extends React.Component {
 
 
   }
+
   componentDidUpdate(preProps) {
-    const {visibleLists,history,autoSearchStatus,searchKey} = this.props;
+    const {visibleLists, history, autoSearchStatus, searchKey} = this.props;
     if (this.props.params.auto === 'yes' && autoSearchStatus === 1) {
       Logger("自动搜索=====");
-      if(visibleLists.length === 0){
+      if (visibleLists.length === 0) {
         Logger({msg: "自动搜索没有发现联系人!!"});
-        let search = this.props.location.search+'&key='+this.props.params.key;
-        history.replace('/customer/create'+search);
+        let search = this.props.location.search + '&key=' + this.props.params.key;
+        history.replace('/customer/create' + search);
       }
-      else if(visibleLists.length === 1){
+      else if (visibleLists.length === 1) {
         Logger({msg: "自动搜索发现只有一个联系人!!"});
-        history.replace('/ticket/' + this.props.visibleLists[0].id+'?searchKey='+searchKey);
+        history.replace('/ticket/' + this.props.visibleLists[0].id + '?searchKey=' + searchKey);
       }
     }
   }
+
   render() {
-    const {SearchBar, Loading, Customer:{CreateBtnPanle, CustomerListTable}}=UI;
+    const {SearchBar, Loading, GoBackTo, Customer:{CreateBtnPanle, CustomerListTable}}=UI;
     Logger({msg: 'customer search  UI :', props: this.props});
     const {setSearchKey, searchCustomers, visibleLists, searchKey, location, history} = this.props;
+    let goBackUrl = '';
+    if (this.props.location.query.cid && this.props.location.query.cid != '') {
+      goBackUrl = '/ticket/' + this.props.location.query.cid;
+      goBackUrl += '?searchKey=' + encodeURI(searchKey);
+    }
 
     return (
       <div className='component'>
-        {this.props.customerKey === null ? (<div></div>) : (
-          <div style={{position: 'absolute',top: '50px',fontSize: '16px',cursor: 'pointer'}}
-               onClick={this.goBackToSelectedCustomerDetail.bind(this)}>
-          <span className="glyphicon glyphicon-chevron-left" aria-hidden="true">
-          </span>返回</div>)}
+        <GoBackTo
+          goBackUrl={goBackUrl}
+          history={history}
+        />
         <SearchBar searchKey={searchKey || this.props.params.key}
                    mountAndSearch={true}
                    placeHolder='手机/电子邮件/姓名'
@@ -45,8 +51,12 @@ class SearchCustomer extends React.Component {
         <div className='payload'>
           { searchKey != '' ? (
             <div>
-              <CreateBtnPanle {...this.props} />
-              <CustomerListTable customers={visibleLists} auto={this.props.params.auto || 'no' } selectedRow={this.selectRow.bind(this)}/>
+              <CreateBtnPanle
+              cid={this.props.location.query.cid || ''}
+              searchKey={searchKey}
+              />
+              <CustomerListTable customers={visibleLists} auto={this.props.params.auto || 'no' }
+                                 selectedRow={this.selectRow.bind(this)}/>
             </div>) :
             (<div><Loading></Loading></div>)}
         </div>
@@ -57,13 +67,13 @@ class SearchCustomer extends React.Component {
   goBackToSelectedCustomerDetail() {
     const {history} = this.props;
     //history.replaceState(null, '/ticket/11');
-    history.replace('/ticket/11')
+    history.goBack();
     //this.props.gotoBackCustomer(this.props.customerKey);
   }
 
-  selectRow(id){
-    const {history,searchKey} = this.props;
-    history.replace('/ticket/'+id+'?searchKey='+searchKey);
+  selectRow(id) {
+    const {history, searchKey} = this.props;
+    history.replace('/ticket/' + id + '?searchKey=' + searchKey);
   }
 
 }

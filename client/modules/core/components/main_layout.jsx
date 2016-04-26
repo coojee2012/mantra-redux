@@ -1,10 +1,11 @@
 import React from 'react';
+import {Logger} from '../../tools';
 const App = React.createClass({
   componentWillMount() {
     //初始化值
     //TODO 在此处listen postal事件
-    console.log('Main_Layout UI:', this.props);
-    console.log('Main_Layout UI roomId:', this.props.coreReducer.roomId);
+    Logger('Main_Layout UI:', this.props);
+    Logger('Main_Layout UI roomId:', this.props.coreReducer.roomId);
     const {history,location,setRoomId}=this.props;
     const openByPhone = (phone)=> {
       history.replace('/search/' + phone+'/yes?w=phone');
@@ -49,7 +50,10 @@ const App = React.createClass({
     }
   },
   componentDidUpdate(preProps, preState) {
-    console.log('====componentDidUpdate:', preProps.coreReducer.roomId, preState);
+    Logger('Core componentDidUpdate!', preProps.coreReducer.roomId, preState);
+  },
+  componentWillUnmount(){
+    Logger({msg: 'Core componentWillUnmount!', props: this.props});
   },
   render() {
     return (

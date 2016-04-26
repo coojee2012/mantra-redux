@@ -100,11 +100,12 @@ export default function () {
       };
     },
     'ticket.create'(ticketObj, agentInfo){
-
+      Unicall.fn.logger.debug('Method -> [ticket.create] :', ticketObj,agentInfo);
       check(ticketObj, Object);
       return new Promise((resolve, reject) => {
         try {
           let res = createTicket(ticketObj, agentInfo);
+          Unicall.fn.logger.debug('Method -> [ticket.create] Success:', res);
           resolve(res);
         } catch (ex) {
           Unicall.fn.logger.error('Method -> [ticket.create] Error:', ex);

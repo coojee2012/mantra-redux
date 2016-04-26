@@ -11,10 +11,11 @@ const h3Style = {
   paddingBottom: "10px"
 };
 class CreateCustomer extends React.Component {
-  componentWillMount(){
+  componentWillMount() {
     const {resetSaveStatus} = this.props;
     resetSaveStatus();
   }
+
   componentDidUpdate(preProps) {
     if (this.props.createReducer.saveStatus === 2) {
       const {history, resetSaveStatus, createReducer:{customerInfo}} = this.props;
@@ -26,7 +27,7 @@ class CreateCustomer extends React.Component {
 
   render() {
     Logger({msg: 'create customer UI :', props: this.props});
-    const {SearchBar, Customer:{CustomerForm, FlipBar},ToolTip}=UI;
+    const {SearchBar, GoBackTo, Customer:{CustomerForm, FlipBar}, ToolTip}=UI;
     const {
       createReducer:{saveStatus},
       searchKey,
@@ -35,21 +36,36 @@ class CreateCustomer extends React.Component {
       location,
       history
     } = this.props;
-    const autoWay =  this.props.location.query.w || '';
+    const autoWay = this.props.location.query.w || '';
     const autoKey = this.props.location.query.key || '';
     let msgType = -1;
-    let msgContent='';
-    if(saveStatus == 2){
+    let msgContent = '';
+    if (saveStatus == 2) {
       msgType = 1;
-      msgContent='保存成功!';
+      msgContent = '保存成功!';
     }
-    if(saveStatus == -1){
+    if (saveStatus == -1) {
       msgType = 0;
-      msgContent='保存失败!';
+      msgContent = '保存失败!';
+    }
+    let goBackUrl = '';
+    if (this.props.location.query.cid && this.props.location.query.cid != '') {
+      goBackUrl = '/ticket/' + this.props.location.query.cid;
+      if (this.props.location.query.searchKey && this.props.location.query.searchKey != '') {
+        goBackUrl += '?searchKey=' + encodeURI(this.props.location.query.searchKey);
+      }
     }
     return (
+
       <Row>
+
         <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 form-group">
+          <div>
+            <GoBackTo
+              goBackUrl={goBackUrl}
+              history={history}
+            />
+          </div>
           <Col>
             <SearchBar searchKey={searchKey}
                        mountAndSearch={false}

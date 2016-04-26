@@ -9,6 +9,7 @@ import {
   TICKET_SAVE_RESET,
   TICKET_INFO,
   TICKET_INIT,
+  TICKET_STORE,
   TICKET_CREATE_ERROR,
   TICKET_INIT_SELECT_OPTIONS
 } from '../actions/actionTypes.js';
@@ -18,6 +19,7 @@ import {
   TICKET_EDIT_CUSTOMER_ERROR,
   TICKET_EDIT_CUSTOMER,
   TICKET_INIT_CUSTOMER,
+  TICKET_STORE_CUSTOMER,
   TICKET_INIT_CUSTOMER_DOING,
   TICKET_INIT_CUSTOMER_DONE,
   TICKET_INIT_CUSTOMER_ERROR,
@@ -31,6 +33,10 @@ function ticketInfo(state = TicketInfo, action) {
       return Object.assign({}, state, action.data);
     case TICKET_INIT:
       return Object.assign({}, state, action.data);
+    case TICKET_STORE:
+      return Object.assign({}, state, action.data);
+    case TICKET_CREATE:
+      return Object.assign({}, state, action.doc);
     default:
       return state;
   }
@@ -50,6 +56,8 @@ function customerInfo(state = CustomerInfo, action) {
     case TICKET_INIT_CUSTOMER:
       return Object.assign({}, state, action.data);
     case TICKET_EDIT_CUSTOMER:
+      return Object.assign({}, state, action.data);
+    case TICKET_STORE_CUSTOMER:
       return Object.assign({}, state, action.data);
     default:
       return state;
@@ -99,15 +107,6 @@ function saveStatus(state = 0, action) {
   }
 }
 
-function create(state = TicketInfo, action) {
-  switch (action.type) {
-    case TICKET_CREATE:
-      return Object.assign({}, state, action.doc);
-    default:
-      return state;
-  }
-}
-
 
 export default combineReducers({
   ticketInfo,
@@ -115,6 +114,5 @@ export default combineReducers({
   saveStatus,
   editCustomerStatus,
   initCustomerStatus,
-  selectOptions,
-  create
+  selectOptions
 });

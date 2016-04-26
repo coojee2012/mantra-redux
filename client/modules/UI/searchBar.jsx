@@ -3,22 +3,23 @@ import {Logger} from '../tools';
 class SearchBar extends React.Component {
   componentDidMount() {
     //TODO 加载历史
-    Logger({msg:'SearchBar UI componentDidMount :', props:this.props});
-    const {search,mountAndSearch} = this.props;
-    if(mountAndSearch){
+    Logger({msg: 'SearchBar UI componentDidMount :', props: this.props});
+    const {search, mountAndSearch} = this.props;
+    if (mountAndSearch) {
       const {searchKeyRef} = this.refs;
-      search(searchKeyRef.value,true)();
+      search(searchKeyRef.value, true)();
     }
   }
- /* componentDidUpdate( nextProps,  nextState){
-    console.log('====',nextProps,  nextState);
-    console.log('SearchBar UI componentDidUpdate :', this.props);
-    const {search} = this.props;
-    const {searchKeyRef} = this.refs;
-    search(searchKeyRef.value)();
-  }*/
+
+  /* componentDidUpdate( nextProps,  nextState){
+   console.log('====',nextProps,  nextState);
+   console.log('SearchBar UI componentDidUpdate :', this.props);
+   const {search} = this.props;
+   const {searchKeyRef} = this.refs;
+   search(searchKeyRef.value)();
+   }*/
   render() {
-    Logger({msg:'SearchBar UI  :', props:this.props});
+    Logger({msg: 'SearchBar UI  :', props: this.props});
     return (
       <div className='toolBar'>
         <div>
@@ -39,11 +40,15 @@ class SearchBar extends React.Component {
   }
 
   doSearch() {
-    const {search,history} = this.props;
+    const {search, history, location} = this.props;
     const {searchKeyRef} = this.refs;
     if (searchKeyRef.value && searchKeyRef.value.length > 0) {
-        history.replace('/search/'+searchKeyRef.value);
-        search(searchKeyRef.value)();
+      let url = '/search/' + searchKeyRef.value;
+      if (location.query.cid && location.query.cid != '') {
+        url += '?cid=' + location.query.cid;
+      }
+      history.replace(url);
+      search(searchKeyRef.value)();
     }
   }
 }
