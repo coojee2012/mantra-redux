@@ -1,7 +1,7 @@
 import React from 'react';
 class CustomerListTableRow extends React.Component {
   render() {
-    console.log('CustomerListTableRow UI:', this.props);
+    
     const {name,contact} = this.props.customer;
     return (
       <tr onClick={this.action.bind(this)}
@@ -12,7 +12,7 @@ class CustomerListTableRow extends React.Component {
       </tr>
     );
   }
-  
+
 
   action(e) {
     const {selectedRow,customer:{id}}=this.props

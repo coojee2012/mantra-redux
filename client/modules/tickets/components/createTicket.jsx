@@ -61,10 +61,14 @@ class CreateTickets extends Component {
   componentDidUpdate(nextProps, nextState) {
     Logger({msg: 'Ticket UI componentDidUpdate!', props: this.props});
     //初始化值 初次加载或路由变更后 @TODO 临时解决路由更新后表单不更新,待寻找更优的方式.
-    const {createReducer:{saveStatus}, LogicActions:{resetSaveStatus}} = this.props;
+    const {createReducer:{saveStatus,editCustomerStatus}, LogicActions:{resetSaveStatus,resetEditCustomerStatus}} = this.props;
     if (saveStatus === 2) {
       Logger("保存工单信息成功!");
       resetSaveStatus();
+    }
+    if(editCustomerStatus === 2){
+      Logger("修改用户信息成功!");
+      resetEditCustomerStatus();
     }
   }
 
@@ -148,7 +152,6 @@ class CreateTickets extends Component {
       params:{cid},
     } = this.props;
     if (ticketInfo && ticketInfo.contactId != '' && ticketInfo.contactId == cid) {
-      Logger("ddddddddddddddddddddddddddddd",ticketInfo);
       ticket.contactId = cid;
       ticket.type = ticketInfo.type;
       ticket.ticketState = ticketInfo.ticketState;

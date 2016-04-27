@@ -15,9 +15,7 @@ export default {
   setSearchKey({Meteor, dispatch}, key) {
     return () => {
       console.log('In loginc action setSearchKey:', key, Meteor);
-      setTimeout(() => {
         dispatch(customerReduxActions.setSearchKey(key));
-      }, 1000);
     };
   },
   resetSaveStatus({Meteor, dispatch}){
@@ -51,7 +49,7 @@ export default {
         }
         callback(err, result);
       });*/
-      
+
       createContact(data, username, (e, r)=> {
         if (e) {
           dispatch(customerReduxActions.saveCustomerError());
@@ -61,7 +59,7 @@ export default {
         }
         callback(e, r);
       });
-      
+
     };
   }
 };

@@ -10,17 +10,16 @@ class SearchCustomer extends React.Component {
   }
 
   componentDidUpdate(preProps) {
-    const {visibleLists, history, autoSearchStatus, searchKey} = this.props;
-    if (this.props.params.auto === 'yes' && autoSearchStatus === 1) {
-      Logger("自动搜索=====");
+    const {visibleLists, history, autoSearchStatus, searchKey, location:{search}, params:{key,auto}} = this.props;
+    if (auto === 'yes' && autoSearchStatus === 1) {
       if (visibleLists.length === 0) {
         Logger({msg: "自动搜索没有发现联系人!!"});
-        let search = this.props.location.search + '&key=' + this.props.params.key;
-        history.replace('/customer/create' + search);
+        let searchStr = search && search != '' ? search + '&key=' + key : '?key=' + key;
+        history.replace('/customer/create' + searchStr);
       }
       else if (visibleLists.length === 1) {
-        Logger({msg: "自动搜索发现只有一个联系人!!"});
-        history.replace('/ticket/' + this.props.visibleLists[0].id + '?searchKey=' + searchKey);
+        Logger("自动搜索发现只有一个联系人!!");
+        history.replace('/ticket/' + visibleLists[0].id + '?searchKey=' + searchKey);
       }
     }
   }
@@ -52,8 +51,8 @@ class SearchCustomer extends React.Component {
           { searchKey != '' ? (
             <div>
               <CreateBtnPanle
-              cid={this.props.location.query.cid || ''}
-              searchKey={searchKey}
+                cid={this.props.location.query.cid || ''}
+                searchKey={searchKey}
               />
               <CustomerListTable customers={visibleLists} auto={this.props.params.auto || 'no' }
                                  selectedRow={this.selectRow.bind(this)}/>

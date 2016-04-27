@@ -9,8 +9,6 @@ import GoBackTo from './goBack.jsx';
 import ToolTip from './toolTip.jsx';
 import Customer from './customer';
 import Tickets from './tickets';
-console.log('ddddddddd',Customer);
-
 export default {
   Error,
   Loading,

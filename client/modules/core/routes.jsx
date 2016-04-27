@@ -21,8 +21,7 @@ export default function (injectDeps, {Meteor,Store}) {
           <Route path="/" component={MainLayoutCtx}>
             <IndexRoute component={Main}/>
             <Route path="search(/:key)(/:auto)" component={SearchCustomer}/>
-            <Route path="customer/create" component={CreateCustomer}>
-            </Route>
+            <Route path="customer/create" component={CreateCustomer} />
             <Route path="ticket(/:cid)" components={CreateTicket}/>
           </Route>
         </Router>

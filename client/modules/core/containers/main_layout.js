@@ -3,7 +3,7 @@
  */
 import Main_Layout from '../components/main_layout.jsx';
 import {Error, Loading} from '../../UI';
-import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
+import {useDeps, compose, composeAll} from 'mantra-core';
 
 const onPropsChange = (props, onData) => {
   const {context} = props;
@@ -12,12 +12,11 @@ const onPropsChange = (props, onData) => {
   //TODO filter
   return Store.subscribe(() => {
     const allState = Store.getState();
-    console.log('onPropsChange sub core container :', allState);
-    onData(null, Store.getState().core);
+    console.log('ddddddddddddddddddddddddddddddddd',allState);
+    onData(null, allState.core);
   });
 }
 export const depsMapper = (context, actions) => {
-  console.log('All Actions:',actions);
   return {
     ...actions.coreLogicActions,
     context: () => context
@@ -25,6 +24,6 @@ export const depsMapper = (context, actions) => {
 }
 
 export default composeAll(
-  composeWithTracker(onPropsChange,Loading,Error),
+  compose(onPropsChange,Loading,Error),
   useDeps(depsMapper)
 )(Main_Layout);

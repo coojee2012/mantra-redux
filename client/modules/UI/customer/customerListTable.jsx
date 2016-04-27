@@ -6,7 +6,7 @@ class CustomerListTable extends React.Component {
     const { customers = [],selectedRow } = this.props;
     const rows = [];
     for (let customer of customers) {
-      rows.push(<CustomerListTableRow customer={customer} selectedRow={selectedRow}/>);
+      rows.push(<CustomerListTableRow key={customer.id} customer={customer} selectedRow={selectedRow}/>);
     }
     return (
       <table className="table table-hover" style={{width: '80%',margin: '0 auto'}}>

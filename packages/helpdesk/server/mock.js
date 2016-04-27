@@ -7,8 +7,8 @@ var refreshToken = null;
 var expireAt = new Date();
 var username="agent1@unicall.cc";
 var password="agent1"
-var host="https://math.yunkefu.cc";
-var jwtHost="https://math.yunkefu.cc";
+var host="http://math.quickdesk.cn";
+var jwtHost="http://math.quickdesk.cn";
 var path="/oauth2/authorize";
 var clientId = Meteor.settings.oauth2.client_id;
 var service = Meteor.settings.oauth2.service;
@@ -21,7 +21,7 @@ export function mockHelpdeskLogin(){
     { service: 'unicall' },
     {
       $set: {
-        clientId: 'yunkefu.cc',
+        clientId: 'quickdesk.cn',
         secret: 'linkdesk',
         loginStyle: "redirect"
       }
@@ -73,7 +73,7 @@ function login(){
         params:{
           auth_type:'sign_out',
           response_type:'code',
-          redirect_uri:"http://math.yunkefu.cc",
+          redirect_uri:jwtHost,
           ref:jwtHost,
           client_id: clientId
         },

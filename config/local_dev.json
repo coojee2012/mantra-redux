@@ -9,8 +9,8 @@
       "links": []
     },
     "helpdesk":{
-      "protocal":"https://",
-      "host":"math.yunkefu.cc",
+      "protocal":"http://",
+      "host":"math.quickdesk.cn",
       "port":null,
       "api":{
         "suggestContacts":"/api/contacts/suggest",
@@ -27,13 +27,13 @@
         "alg": "HS256",
         "kty": "oct",
         "use": "sig",
-        "k": "859OnH-sSt-80TsIbEqmA1-N1HFwOynORww5n0gndJGbWv9RfdxNG6i-928UL28U5mwbhCzTVSP5S-BxCo_Yof23hiUe3l9Wi3wOSMe-9jHhVqKqg3TahrE_67UZYS1ME5f82qV-T4zxW-lO1N6m1WTEwNNw3oSkswdF7Wjo5moCJQ2iPn1ohcK1JUzpsD_pGy3XVHUeAghydJ-Lr2qA8kWiDPBd7yRl6bUGgzMKSmeCviDWq67XHX1CqaYwGjUHDJfLrLhd9qS1fr3jrFNxEqx3wYjd_-Emsjo-g9P00VCS9TiIuANqvzYmEXX9wK9hGp5C9Vm4ZVRSxagRhNYG2g",
-        "kid": "ff864fe2-0fa3-4c6d-9056-74fdd814f0c4"
+        "k": "lBDYNJW3q8hfCqXvRBJSurUA5CUwP5aNGYqnUnALyCzwEXOUXQTIcHi_cNmjwzeXhJ5ShAQiqjbzhuZWku3SkcLkc22iC15PsfNybTISqQut5ds8mRYRe-MpwKi-reVyn-1i5YCdWrKPMEpo_4yBOPk3_Mo7EyYRDV8GSXucrreE5BnaZJdlAHU2ispZMrch0zm3lwoLAox2YlLp4NrCYziVC_UYSwHeW96UcO6HUefaDFCTyIycw02aXSrq05TyR21-ky5-cLhlj1mmtn-tQi6kHb5NRYJLSmyiRrARVhyT-rJE0Fnne0vr-g9PshjJhMsMtlOW41zVh5vEVc_XRA",
+        "kid": "43662435-efa3-4ce2-87d7-d08992232a62"
       },
       "oauth2": {
         "service": "unicall",
-        "client_id": "yunkefu.cc",
-        "client_secret": "yunkefu.cc"
+        "client_id": "quickdesk.cn",
+        "client_secret": "quickdesk.cn"
       }
     }
   },
@@ -61,17 +61,17 @@
     "alg": "HS256",
     "kty": "oct",
     "use": "sig",
-    "k": "859OnH-sSt-80TsIbEqmA1-N1HFwOynORww5n0gndJGbWv9RfdxNG6i-928UL28U5mwbhCzTVSP5S-BxCo_Yof23hiUe3l9Wi3wOSMe-9jHhVqKqg3TahrE_67UZYS1ME5f82qV-T4zxW-lO1N6m1WTEwNNw3oSkswdF7Wjo5moCJQ2iPn1ohcK1JUzpsD_pGy3XVHUeAghydJ-Lr2qA8kWiDPBd7yRl6bUGgzMKSmeCviDWq67XHX1CqaYwGjUHDJfLrLhd9qS1fr3jrFNxEqx3wYjd_-Emsjo-g9P00VCS9TiIuANqvzYmEXX9wK9hGp5C9Vm4ZVRSxagRhNYG2g",
-    "kid": "ff864fe2-0fa3-4c6d-9056-74fdd814f0c4"
+    "k": "lBDYNJW3q8hfCqXvRBJSurUA5CUwP5aNGYqnUnALyCzwEXOUXQTIcHi_cNmjwzeXhJ5ShAQiqjbzhuZWku3SkcLkc22iC15PsfNybTISqQut5ds8mRYRe-MpwKi-reVyn-1i5YCdWrKPMEpo_4yBOPk3_Mo7EyYRDV8GSXucrreE5BnaZJdlAHU2ispZMrch0zm3lwoLAox2YlLp4NrCYziVC_UYSwHeW96UcO6HUefaDFCTyIycw02aXSrq05TyR21-ky5-cLhlj1mmtn-tQi6kHb5NRYJLSmyiRrARVhyT-rJE0Fnne0vr-g9PshjJhMsMtlOW41zVh5vEVc_XRA",
+    "kid": "43662435-efa3-4ce2-87d7-d08992232a62"
   },
   "oauth2": {
     "service": "unicall",
-    "client_id": "yunkefu.cc",
-    "client_secret": "yunkefu.cc"
+    "client_id": "quickdesk.cn",
+    "client_secret": "quickdesk.cn"
   },
   "helpdesk":{
-    "protocal":"https://",
-    "host":"math.yunkefu.cc",
+    "protocal":"http://",
+    "host":"math.quickdesk.cn",
     "port":null,
     "api":{
       "suggestContacts":"/api/contacts/suggest",

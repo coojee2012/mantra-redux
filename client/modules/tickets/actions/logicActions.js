@@ -68,6 +68,9 @@ export default {
     dispatch(ReduxActions.resetSaveStatus());
 
   },
+  resetEditCustomerStatus(){
+    dispatch(ReduxActions.editCustomerStatusReset());
+  },
   initCustomer({Meteor, dispatch}, cid){
     dispatch(ReduxActions.initCustomerDoing());
     Meteor.call('customer.detail', cid, (err, result) => {

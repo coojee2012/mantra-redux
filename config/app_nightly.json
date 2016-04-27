@@ -30,8 +30,8 @@
               "links": []
             },
             "helpdesk": {
-              "protocal": "https://",
-              "host": "math.yunkefu.cc",
+              "protocal": "http://",
+              "host": "math.quickdesk.cn",
               "port": null,
               "api": {
                 "suggestContacts": "/api/contacts/suggest",
@@ -71,7 +71,7 @@
           },
           "helpdesk": {
             "protocal": "http://",
-            "host": "math.yunkefu.cc",
+            "host": "math.quickdesk.cn",
             "port": null,
             "api": {
               "suggestContacts": "/api/contacts/suggest",

@@ -3,7 +3,7 @@
  */
 const Logger = (...args)=> {
   if (window && window.console) {
-    window.console.log(...args);
+    window.console.log(new Date(),...args);
   } else {
 
   }
