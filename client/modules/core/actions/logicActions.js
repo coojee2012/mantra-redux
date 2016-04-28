@@ -9,9 +9,12 @@ export default {
   },
   saveState({Store}, roomId){
     const states = Store.getState();
-    Logger('切换房间,保存状态:', states);
-    states.core.coreReducer.roomId = roomId;
-    const statesJsonStr = JSON.stringify(states);
+    let clonedObj = {_id:roomId,states};
+    //此处对states的修改直接会影响到Store的state数据,所以,不建议修改sates的数据
+    //Object.assign(clonedObj, states);
+    //Logger('切换房间,保存状态:', clonedObj);
+    //clonedObj.core.coreReducer.roomId = roomId;
+    const statesJsonStr = JSON.stringify(clonedObj);
     localStorage.setItem(roomId, statesJsonStr);
   }
 };

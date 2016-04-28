@@ -22,6 +22,8 @@ class CreateCustomer extends React.Component {
       Logger({msg: "保存用户信息成功!", props: this.props.createReducer, customerInfo: customerInfo});
       resetSaveStatus();
       history.replace('/ticket/' + this.props.createReducer.customerInfo.id);
+    }else if(this.props.createReducer.saveStatus === -1){
+      resetSaveStatus();
     }
   }
 
@@ -40,10 +42,10 @@ class CreateCustomer extends React.Component {
     const autoKey = this.props.location.query.key || '';
     let msgType = -1;
     let msgContent = '';
-    if (saveStatus == 2) {
+    /*if (saveStatus == 2) {
       msgType = 1;
       msgContent = '保存成功!';
-    }
+    }*/
     if (saveStatus == -1) {
       msgType = 0;
       msgContent = '保存失败!';

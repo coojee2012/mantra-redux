@@ -10,7 +10,11 @@ class SearchCustomer extends React.Component {
   }
 
   componentDidUpdate(preProps) {
-    const {visibleLists, history, autoSearchStatus, searchKey, location:{search}, params:{key,auto}} = this.props;
+    const {visibleLists, history, autoSearchStatus,setSearchKey, searchKey, location:{search}, params:{key,auto}} = this.props;
+
+    if(key && key!='' && key != preProps.params.key){
+      setSearchKey(key)();
+    }
     if (auto === 'yes' && autoSearchStatus === 1) {
       if (visibleLists.length === 0) {
         Logger({msg: "自动搜索没有发现联系人!!"});

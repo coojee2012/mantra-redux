@@ -1,6 +1,7 @@
 /**
  * Created by Junwei on 16/1/22.
  */
+import { HTTP } from 'meteor/http';
 (function() {
     this.authApi = (function() {
         function authApi() {}

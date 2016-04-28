@@ -12,7 +12,6 @@ const onPropsChange = (props, onData) => {
   //TODO filter
   return Store.subscribe(() => {
     const allState = Store.getState();
-    console.log('ddddddddddddddddddddddddddddddddd',allState);
     onData(null, allState.core);
   });
 }

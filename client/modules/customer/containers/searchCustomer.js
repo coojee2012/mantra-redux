@@ -27,6 +27,7 @@ export const onPropsChange = ({context}, onData) => {
   const {Store} = context();
   //console.log('todo container store:', Store);
   onData(null, {
+    autoSearchStatus:0,
     searchKey: '',
     visibleLists: []
   });
@@ -35,13 +36,12 @@ export const onPropsChange = ({context}, onData) => {
     onData(null, {
       autoSearchStatus: state['customer']['searchReducer'].autoSearchStatus,
       visibleLists: state['customer']['searchReducer'].customerLists,
-      searchKey: state['customer']['searchReducer'].setSearchKey
+      searchKey: state['customer']['searchReducer'].searchKey
     });
   });
 };
 
 export const depsMapper = (context, actions) => {
-  console.log('注入的action函数:', actions);
   return {
     ...actions.customerLogicActions,
     context: () => context

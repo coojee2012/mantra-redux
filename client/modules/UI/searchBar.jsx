@@ -11,13 +11,16 @@ class SearchBar extends React.Component {
     }
   }
 
-  /* componentDidUpdate( nextProps,  nextState){
-   console.log('====',nextProps,  nextState);
-   console.log('SearchBar UI componentDidUpdate :', this.props);
-   const {search} = this.props;
-   const {searchKeyRef} = this.refs;
-   search(searchKeyRef.value)();
-   }*/
+  componentDidUpdate(preProps) {
+    Logger('SearchBar UI componentDidUpdate :', this.props);
+    const {search, searchKey} = this.props;
+    if (searchKey != '' && searchKey != preProps.searchKey) {
+      const {searchKeyRef} = this.refs;
+      searchKeyRef.value = searchKey;
+      search(searchKey, true)();
+    }
+  }
+
   render() {
     Logger({msg: 'SearchBar UI  :', props: this.props});
     return (

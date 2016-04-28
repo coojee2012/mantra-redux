@@ -4,10 +4,9 @@
 import ReduxActions from './reduxActions';
 import {TicketInfo} from '../configs/const';
 import {createTicket as createTicketAPI} from 'meteor/helpdesk'
+import {Logger} from '../../tools';
 export default {
-  createTicket(context, data) {
-    const {Meteor, Store} = context;
-    const dispatch = Store.dispatch;
+  createTicket({dispatch}, data) {
     dispatch(ReduxActions.createTicketSaving());
 
 
@@ -52,7 +51,7 @@ export default {
         "attachments": []
       };
       createTicketAPI(ticketObj, (err, res)=> {
-        console.log('ticket.create:', err, res);
+        Logger('ticket.create:', err, res);
         if (err) {
           dispatch(ReduxActions.createTicketError(err));
         } else {
@@ -63,18 +62,18 @@ export default {
       });
     };
   },
-  resetSaveStatus({Meteor, dispatch}){
+  resetSaveStatus({dispatch}){
 
     dispatch(ReduxActions.resetSaveStatus());
 
   },
-  resetEditCustomerStatus(){
+  resetEditCustomerStatus({dispatch}){
     dispatch(ReduxActions.editCustomerStatusReset());
   },
   initCustomer({Meteor, dispatch}, cid){
     dispatch(ReduxActions.initCustomerDoing());
     Meteor.call('customer.detail', cid, (err, result) => {
-      console.log('customer.detail:', err, result);
+      Logger('customer.detail:', err, result);
       if (err) {
         dispatch(ReduxActions.initCustomerError());
       } else {
@@ -83,19 +82,19 @@ export default {
       }
     });
   },
-  initTicket({Meteor, dispatch}, ticket){
+  initTicket({dispatch}, ticket){
     dispatch(ReduxActions.initTicket(ticket));
   },
-  storeTicket({Meteor, dispatch}, ticket){
+  storeTicket({dispatch}, ticket){
     dispatch(ReduxActions.storeTicket(ticket));
   },
-  storeCustomer({Meteor, dispatch}, customer){
+  storeCustomer({dispatch}, customer){
     dispatch(ReduxActions.storeCustomer(customer));
   },
   initSelectOptions({Meteor, dispatch}){
     return (callback) => {
       Meteor.call('ticket.configs', (err, result) => {
-        console.log('ticket.configs:', err, result);
+        Logger('ticket.configs:', err, result);
         if (err) {
 
         } else {
@@ -109,7 +108,7 @@ export default {
     dispatch(ReduxActions.editCustomerDoing());
     return (callback) => {
       Meteor.call('ticket.customer.edit', data, (err, result) => {
-        console.log('ticket.customer.edit:', err, result);
+        Logger('ticket.customer.edit:', err, result);
         if (err) {
           dispatch(ReduxActions.editCustomerError());
         } else {

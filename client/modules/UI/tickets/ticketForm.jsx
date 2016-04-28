@@ -15,11 +15,11 @@ class TicketFrom extends Component {
     this.state = {};
   }
   componentWillMount() {
-    Logger({msg: 'Ticket Form componentWillMount!', props: this.props});
+    Logger('Ticket Form componentWillMount!',this.props);
   }
 
   componentDidMount() {
-    Logger({msg: 'Ticket Form componentDidMount!', props: this.props});
+    Logger('Ticket Form componentDidMount!',  this.props);
     //自适应description
     try {
       autosize(this.refs.description);
@@ -29,7 +29,7 @@ class TicketFrom extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    Logger({msg: 'Ticket Form componentWillUpdate!', props: this.props});
+    Logger('Ticket Form componentWillUpdate!', this.props);
     //初始化值 初次加载或路由变更后 @TODO 临时解决路由更新后表单不更新,待寻找更优的方式.
     //if(this.props.values.contactId != this.props.defaultValues.contactId){
     //this.props.initializeForm(this.props.createReducer.create);
@@ -38,7 +38,7 @@ class TicketFrom extends Component {
   }
 
   componentDidUpdate(nextProps) {
-    Logger({msg: 'Ticket Form componentDidUpdate!', props: this.props});
+    Logger('Ticket Form componentDidUpdate!', this.props);
     //初始化值 初次加载或路由变更后 @TODO 临时解决路由更新后表单不更新,待寻找更优的方式.
     if (this.props.ticketInfo && this.props.ticketInfo.contactId != '' && this.props.ticketInfo.contactId != this.props.values.contactId) {
       Logger({msg: 'Ticket Form 重新初始化数据!'});
@@ -47,7 +47,7 @@ class TicketFrom extends Component {
   }
 
   componentWillUnmount() {
-    Logger({msg: 'Ticket Form componentWillUnmount!', props: this.props});
+    Logger('Ticket Form componentWillUnmount!',this.props);
     const {storeTicket, values, dirty} = this.props;
     if (dirty && typeof storeTicket == 'function') {
       storeTicket(values);
@@ -60,10 +60,10 @@ class TicketFrom extends Component {
       try {
         self.props.saveTickets(values)((err, resulet)=> {
           if (err) {
-            Logger({msg: "showMsg", data: [{msgType: 0, msgContent: ObjTools.values(err).shift()}]});
+            Logger('保存工单失败:',err);
             reject(err);
           } else {
-            Logger({msg: "showMsg", data: [{msgType: 1, msgContent: "添加成功"}]});
+            Logger('保存工单成功!');
             self.props.resetForm();
             self.props.fields.groups.onChange(); //解决提交后客服不初始化的BUG
             resolve(resulet);
@@ -79,7 +79,7 @@ class TicketFrom extends Component {
   clickSubmit() {
     if (this.props.invalid) {
       const error = ObjTools.values(this.props.errors).shift();
-      Logger({msg: "showMsg", data: [{msgType: 0, msgContent: error}]});
+      Logger("发现脏数据:", error);
     }
   }
 
@@ -88,8 +88,7 @@ class TicketFrom extends Component {
   }
 
   render() {
-    console.log('Ticket Form UI:', this.props);
-
+    Logger('Ticket Form UI:', this.props);
     const h3Style = {
       paddingTop: "20px",
       borderBottom: "1px #CEC6C6 solid",

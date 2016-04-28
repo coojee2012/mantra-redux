@@ -5,7 +5,7 @@ import {combineReducers} from 'redux';
 import {CUSTOMER_SEARCH, CUSTOMER_SEARCH_KEY, CUSTOMER_SEARCH_AUTO_DONE} from '../actions/actionTypes.js';
 
 
-function setSearchKey(state = '', action) {
+function searchKey(state = '', action) {
   switch (action.type) {
     case CUSTOMER_SEARCH_KEY:
       return action.key;
@@ -24,7 +24,6 @@ function autoSearchStatus(state = 0, action) {
 }
 
 function customerLists(state = [], action) {
-  console.log('In reducer:', action);
   switch (action.type) {
     case CUSTOMER_SEARCH:
       return [
@@ -37,7 +36,7 @@ function customerLists(state = [], action) {
 
 
 export default combineReducers({
-  setSearchKey,
+  searchKey,
   autoSearchStatus,
   customerLists
 });

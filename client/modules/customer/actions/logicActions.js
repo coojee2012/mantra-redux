@@ -3,63 +3,48 @@
  */
 import customerReduxActions from './reduxActions';
 import {createContact}   from 'meteor/helpdesk';
+import {Logger} from '../../tools';
 export default {
-  search({Meteor, dispatch}, key) {
+  search({dispatch}, key) {
     return () => {
-      console.log('In loginc action :', key);
-      setTimeout(() => {
         dispatch(customerReduxActions.search(key));
-      }, 1000);
     };
   },
-  setSearchKey({Meteor, dispatch}, key) {
+  setSearchKey({dispatch}, key) {
     return () => {
-      console.log('In loginc action setSearchKey:', key, Meteor);
-        dispatch(customerReduxActions.setSearchKey(key));
+      dispatch(customerReduxActions.setSearchKey(key));
     };
   },
-  resetSaveStatus({Meteor, dispatch}){
-    return()=>{
+  resetSaveStatus({dispatch}){
+    return ()=> {
       dispatch(customerReduxActions.resetCustomerSaveStatus());
     }
   },
-  searchCustomers({Meteor, dispatch}, key,isAuto=false) {
+  searchCustomers({Meteor, dispatch}, key, isAuto = false) {
     return () => {
-      Meteor.call('customer.search', key,(err, result) => {
-        console.log('customer.search:', err, result);
+      Meteor.call('customer.search', key, (err, result) => {
+        Logger('customer.search:', err, result);
         dispatch(customerReduxActions.setSearchKey(key));
         dispatch(customerReduxActions.search(result));
-        if(isAuto){
+        if (isAuto) {
           dispatch(customerReduxActions.setAutoSearchDone());
         }
-
       });
     };
   },
-  addCustomer({Meteor, dispatch}, data,username) {
+  addCustomer({dispatch}, data, username) {
     return (callback) => {
       dispatch(customerReduxActions.createCustomerSaving());
-     /* Meteor.call('customer.create', data, (err, result) => {
-        if (err) {
-          dispatch(customerReduxActions.saveCustomerError());
-        } else {
-          dispatch(customerReduxActions.createCustomerNew(result));
-          dispatch(customerReduxActions.createCustomerSaved());
-
-        }
-        callback(err, result);
-      });*/
-
       createContact(data, username, (e, r)=> {
+        Logger('customer.create:', e, r);
         if (e) {
           dispatch(customerReduxActions.saveCustomerError());
         } else {
-          dispatch(customerReduxActions.createCustomerNew(result));
+          dispatch(customerReduxActions.createCustomerNew(r));
           dispatch(customerReduxActions.createCustomerSaved());
         }
         callback(e, r);
       });
-
     };
   }
 };
